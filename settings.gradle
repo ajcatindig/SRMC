@@ -1,0 +1,8 @@
+rootProject.name = "SRMC"
+
+include(":app")
+include(":app:composeapp")
+
+include(":core")
+include(":data:remote")
+include(":repository")

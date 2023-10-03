@@ -1,0 +1,9 @@
+ext {
+    ProjectConfig = [
+            compileSdkVersion: 33,
+            minSdkVersion    : 21,
+            targetSdkVersion : 31,
+            versionCode      : 20231003,
+            versionName      : "1.0.0"
+    ]
+}

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#12130F</color>
-    <color name="primaryLightColor">#f3f3f9</color>
+    <color name="primaryColor">#FFFFFF</color>
+    <color name="primaryLightColor">#FFFFFF</color>
     <color name="primaryDarkColor">#cccccc</color>
 
     <color name="secondaryColor">#12130F</color>
@@ -10,6 +10,8 @@
 
     <color name="background">#FFFFFF</color>
     <color name="onPrimary">#FFFFFF</color>
+
+    <color name="primaryText">#000000</color>
 
     <color name="onSecondary">#000000</color>
     <color name="onBackground">#000000</color>
@@ -21,6 +23,8 @@
 
     <color name="primaryTextColor">#000000</color>
     <color name="secondaryTextColor">#ffffff</color>
+    <color name="buttonColor">#348252</color>
+    <color name="secondaryButton">#C42929</color>
 
     <color name="defaultWhite">#ffffff</color>
     

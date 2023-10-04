@@ -21,6 +21,6 @@
     <item
         android:width="192dp"
         android:height="192dp"
-        android:drawable="@mipmap/ic_launcher_foreground"
+        android:drawable="@drawable/app_logo"
         android:gravity="center" />
 </layer-list>

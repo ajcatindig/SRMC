@@ -53,7 +53,11 @@ import com.example.srmc.composeapp.ui.theme.typography
 import com.example.srmc.composeapp.utils.SRMCPreview
 
 @Composable
-fun LoginScreen()
+fun LoginScreen(
+        onNavigateToSignUp : () -> Unit,
+        onNavigateToForgot : () -> Unit,
+        onNavigateToHome : () -> Unit
+)
 {
 
 }

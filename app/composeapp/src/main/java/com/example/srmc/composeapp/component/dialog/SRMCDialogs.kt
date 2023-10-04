@@ -1,5 +1,6 @@
 package com.example.srmc.composeapp.component.dialog
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.AlertDialog
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -68,7 +70,8 @@ fun FailureDialog(failureMessage : String, onDismissed: () -> Unit = {})
                             textAlign = TextAlign.Center ,
                             modifier = Modifier.padding(horizontal = 16.dp)
                         )
-                    Button(onClick = { isDismissed.value = true },
+                    Button(onClick = { isDismissed.value = true } ,
+                           colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff348252)) ,
                            modifier = Modifier
                                    .fillMaxWidth()
                                    .height(80.dp)
@@ -110,6 +113,7 @@ fun SuccessDialog(successMessage : String,
                             modifier = Modifier.padding(horizontal = 16.dp)
                         )
                     Button(onClick = { isDismissed.value = true },
+                           colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff348252)) ,
                            modifier = Modifier
                                    .fillMaxWidth()
                                    .height(80.dp)

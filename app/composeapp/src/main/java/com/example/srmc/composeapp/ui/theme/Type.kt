@@ -18,19 +18,34 @@ private val universalStd = FontFamily(
         Font(R.font.universal_std)
                                      )
 
+private val poppins = FontFamily(
+        Font(R.font.poppins_regular) ,
+        Font(R.font.poppins_medium, FontWeight.W500) ,
+        Font(R.font.poppins_bold, FontWeight.Bold))
+
 val typography = Typography(
+        h2 = TextStyle(
+                fontFamily = poppins,
+                fontWeight = FontWeight.W600,
+                fontSize = 42.sp
+                      ),
+        h3 = TextStyle(
+                fontFamily = poppins,
+                fontWeight = FontWeight.W600,
+                fontSize = 36.sp
+                      ),
         h4 = TextStyle(
-                fontFamily = inter,
+                fontFamily = poppins,
                 fontWeight = FontWeight.W600,
                 fontSize = 30.sp
                       ),
         h5 = TextStyle(
-                fontFamily = inter,
+                fontFamily = poppins,
                 fontWeight = FontWeight.W600,
                 fontSize = 24.sp
                       ),
         h6 = TextStyle(
-                fontFamily = inter,
+                fontFamily = poppins,
                 fontWeight = FontWeight.W600,
                 fontSize = 20.sp
                       ),

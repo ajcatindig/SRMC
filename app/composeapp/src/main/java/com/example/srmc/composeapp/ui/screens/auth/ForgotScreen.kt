@@ -44,13 +44,25 @@ import com.example.srmc.composeapp.component.dialog.LoaderDialog
 import com.example.srmc.composeapp.component.dialog.SuccessDialog
 import com.example.srmc.composeapp.ui.theme.typography
 import com.example.srmc.composeapp.utils.SRMCPreview
+import com.example.srmc.composeapp.utils.collectState
+import com.example.srmc.view.viewmodel.auth.ForgotViewModel
 
 @Composable
 fun ForgotScreen(
-        onNavigateUp : () -> Unit
-                )
+        onNavigateUp : () -> Unit,
+        viewModel : ForgotViewModel)
 {
+    val state by viewModel.collectState()
 
+    ForgotContent(
+            isLoading = state.isLoading ,
+            email =  state.email,
+            onEmailChange =  viewModel::setEmail,
+            isValidEmail =  state.isValidEmail ?: true,
+            onSubmitClick = viewModel::sendEmail ,
+            onBackClick =  onNavigateUp ,
+            isSuccess =  state.isSuccess,
+            error = state.error)
 }
 
 @Composable
@@ -161,7 +173,7 @@ fun ForgotForm(
             modifier = Modifier
                     .fillMaxWidth()
                     .height(85.dp)
-                    .padding(vertical = 16.dp, horizontal = 16.dp) ,
+                    .padding(vertical = 16.dp , horizontal = 16.dp) ,
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff348252)) ,
             shape = RoundedCornerShape(25.dp)
           )

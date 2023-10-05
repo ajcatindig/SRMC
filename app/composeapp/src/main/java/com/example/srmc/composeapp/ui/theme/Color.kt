@@ -4,7 +4,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-val primary = Color(0xFFFFFFFF)
+val primary = Color(0xFF12130F)
 
 val backgroundDay = Color(0xfff3f7f9)
 val backgroundNight = Color(0xff1A191E)
@@ -17,6 +17,11 @@ val white = Color(0xffffffff)
 
 val green = Color(0xff6FCF97)
 val red = Color(0xffEB5757)
+
+val offWhite = Color(0xffebf3ff)
+val lightBlue = Color(0xff839bea)
+val lightGray = Color(0xfEEEEEEE)
+val darkOrange = Color(0xFFB96601)
 
 val buttonGreen = Color(0xff348252)
 val buttonRed = Color(0xffC42929)

@@ -58,13 +58,34 @@ import com.example.srmc.composeapp.component.dialog.LoaderDialog
 import com.example.srmc.composeapp.component.dialog.SuccessDialog
 import com.example.srmc.composeapp.ui.theme.typography
 import com.example.srmc.composeapp.utils.SRMCPreview
+import com.example.srmc.composeapp.utils.collectState
+import com.example.srmc.view.viewmodel.auth.RegisterViewModel
 
 @Composable
 fun RegisterScreen(
-        onNavigateUp : () -> Unit
-                  )
+        onNavigateUp : () -> Unit,
+        viewModel : RegisterViewModel)
 {
+    val state by viewModel.collectState()
 
+    RegisterContent(
+            isLoading = state.isLoading ,
+            username =  state.username,
+            onUsernameChange =  viewModel::setUsername,
+            email =  state.email,
+            onEmailChange =  viewModel::setEmail,
+            password =  state.password,
+            onPasswordChange =  viewModel::setPassword,
+            confirmPassword =  state.confirmPassword,
+            onConfirmPasswordChange =  viewModel::setConfirmPassword,
+            isValidConfirmPassword =  state.isValidConfirmPassword ?: true,
+            onNavigateUp = onNavigateUp ,
+            onSignUpClick = viewModel::register ,
+            isValidUsername =  state.isValidUsername ?: true,
+            isValidPassword =  state.isValidPassword ?: true,
+            isValidEmail =  state.isValidEmail ?: true,
+            isSuccess =  state.isSuccess,
+            error = state.error)
 }
 
 @Composable
@@ -101,7 +122,7 @@ fun RegisterContent(
 
     Column(modifier = Modifier
             .fillMaxSize()
-            .padding(vertical = 40.dp, horizontal = 20.dp)
+            .padding(vertical = 40.dp , horizontal = 20.dp)
             .background(MaterialTheme.colors.surface)
             .verticalScroll(rememberScrollState()))
     {
@@ -313,7 +334,7 @@ private fun LoginLink(modifier : Modifier, onLoginClick : () -> Unit)
     Text(
             text = buildAnnotatedString {
                 append("Already have an account? Login")
-                addStyle(SpanStyle(color = Color.Blue) , 24 , this.length)
+                addStyle(SpanStyle(color = Color(0xff15C3DD)) , 24 , this.length)
             },
             style = typography.subtitle1,
             modifier = modifier

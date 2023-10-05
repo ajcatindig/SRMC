@@ -20,7 +20,6 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Lock
 import androidx.compose.material.icons.outlined.Person
@@ -51,15 +50,29 @@ import com.example.srmc.composeapp.component.dialog.FailureDialog
 import com.example.srmc.composeapp.component.dialog.LoaderDialog
 import com.example.srmc.composeapp.ui.theme.typography
 import com.example.srmc.composeapp.utils.SRMCPreview
+import com.example.srmc.composeapp.utils.collectState
+import com.example.srmc.view.viewmodel.auth.LoginViewModel
 
 @Composable
 fun LoginScreen(
-        onNavigateToSignUp : () -> Unit,
-        onNavigateToForgot : () -> Unit,
+        viewModel : LoginViewModel ,
+        onNavigateToSignUp : () -> Unit ,
+        onNavigateToForgot : () -> Unit ,
         onNavigateToHome : () -> Unit
 )
 {
+    val state by viewModel.collectState()
 
+    LoginContent(
+            isLoading = state.isLoading ,
+            email =  state.email,
+            password =  state.password,
+            onEmailChange =  viewModel::setEmail,
+            onPasswordChange =  viewModel::setPassword,
+            onLoginClick =  viewModel::login,
+            onForgotClick = onNavigateToForgot ,
+            onSignUpClick = onNavigateToSignUp ,
+            error = state.error)
 }
 
 @Composable
@@ -83,7 +96,7 @@ fun LoginContent(
     }
     Column(modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 50.dp, horizontal = 20.dp)
+            .padding(vertical = 50.dp , horizontal = 20.dp)
             .background(MaterialTheme.colors.surface)
             .verticalScroll(rememberScrollState()))
     {
@@ -118,10 +131,10 @@ fun TopGreeting()
 
     Text(
             text = "WELCOME" ,
-            fontWeight = FontWeight.ExtraBold,
-            fontSize = 40.sp,
+            style = typography.h2 ,
+            fontWeight = FontWeight.W500,
             modifier = Modifier
-                    .padding(horizontal = 16.dp , vertical = 20.dp)
+                    .padding(horizontal = 16.dp, vertical = 20.dp)
                     .fillMaxWidth() ,
             textAlign = TextAlign.Center)
 }
@@ -195,7 +208,7 @@ fun ForgotPasswordLink(modifier : Modifier, onForgotClick : () -> Unit)
 {
     Text(text = buildAnnotatedString {
         append("Forgot Password?")
-        addStyle(SpanStyle(color = Color.Blue), start = 0, this.length)
+        addStyle(SpanStyle(color = Color(0xff15C3DD)), start = 0, this.length)
         toAnnotatedString()
     },
          style = typography.subtitle1,
@@ -209,7 +222,7 @@ fun SignUpLink(modifier : Modifier, onSignUpClick : () -> Unit)
 {
     Text(text = buildAnnotatedString {
         append("Don't have an account? Sign up")
-        addStyle(SpanStyle(color = Color.Blue), start = 23, this.length)
+        addStyle(SpanStyle(color = Color(0xff15C3DD)), start = 23, this.length)
         toAnnotatedString()
     },
          style = typography.subtitle1,

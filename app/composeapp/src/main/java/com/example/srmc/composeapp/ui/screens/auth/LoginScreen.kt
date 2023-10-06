@@ -73,6 +73,12 @@ fun LoginScreen(
             onForgotClick = onNavigateToForgot ,
             onSignUpClick = onNavigateToSignUp ,
             error = state.error)
+
+    LaunchedEffect(state.isLoggedIn) {
+        if (state.isLoggedIn) {
+            onNavigateToHome()
+        }
+    }
 }
 
 @Composable
@@ -134,7 +140,7 @@ fun TopGreeting()
             style = typography.h2 ,
             fontWeight = FontWeight.W500,
             modifier = Modifier
-                    .padding(horizontal = 16.dp, vertical = 20.dp)
+                    .padding(horizontal = 16.dp , vertical = 20.dp)
                     .fillMaxWidth() ,
             textAlign = TextAlign.Center)
 }

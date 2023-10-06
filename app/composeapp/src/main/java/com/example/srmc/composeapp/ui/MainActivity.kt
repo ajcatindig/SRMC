@@ -18,6 +18,8 @@ import javax.inject.Inject
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.example.srmc.R
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
 
 @AndroidEntryPoint
@@ -26,6 +28,12 @@ class MainActivity : AppCompatActivity()
 
     @Inject
     lateinit var preferenceManager : PreferenceManager
+
+    @EntryPoint
+    @InstallIn(ActivityComponent::class)
+    interface ViewModelFactoryProvider{
+
+    }
     override fun onCreate(savedInstanceState : Bundle?)
     {
         setTheme(R.style.AppTheme)

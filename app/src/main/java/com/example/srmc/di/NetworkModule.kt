@@ -2,6 +2,7 @@ package com.example.srmc.di
 
 import com.example.srmc.core.utils.moshi
 import com.example.srmc.data.remote.Constant
+import com.example.srmc.data.remote.api.AuthService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -23,19 +24,13 @@ class NetworkModule {
                     .readTimeout(1, TimeUnit.MINUTES)
                     .writeTimeout(1, TimeUnit.MINUTES)
 
-//    @Provides
-//    fun provideNotyService(authInterceptor: AuthInterceptor): NotyService {
-//        return baseRetrofitBuilder
-//                .client(okHttpClientBuilder.addInterceptor(authInterceptor).build())
-//                .build()
-//                .create(NotyService::class.java)
-//    }
-//
-//    @Provides
-//    fun provideNotyAuthService(): NotyAuthService {
-//        return baseRetrofitBuilder
-//                .client(okHttpClientBuilder.build())
-//                .build()
-//                .create(NotyAuthService::class.java)
-//    }
+
+    @Provides
+    fun provideAuthService() : AuthService
+    {
+        return baseRetrofitBuilder
+                .client(okHttpClientBuilder.build())
+                .build()
+                .create(AuthService::class.java)
+    }
 }

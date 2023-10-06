@@ -6,6 +6,7 @@ sealed class Either<T> {
     data class Forbidden<T>(val message : String) : Either<T>()
     data class Unprocessable<T>(val message : String) : Either<T>()
     data class ServerError<T>(val message : String) : Either<T>()
+    data class Error<T>(val message : String) : Either<T>()
 
     companion object {
         fun <T> success(data : T) = Success(data)
@@ -13,6 +14,8 @@ sealed class Either<T> {
         fun <T> forbidden(message : String) = Forbidden<T>(message)
         fun <T> unprocessable(message : String) = Unprocessable<T>(message)
         fun <T> serverError(message : String) = ServerError<T>(message)
+
+        fun <T> error(message : String) = Error<T>(message)
     }
 
     inline fun onSuccess(block : (T) -> Unit) : Either<T> = apply {
@@ -37,6 +40,12 @@ sealed class Either<T> {
     }
     inline fun onServerError(block : (String) -> Unit) : Either<T> = apply {
         if (this is ServerError) {
+            block(message)
+        }
+    }
+
+    inline fun onError(block : (String) -> Unit) : Either<T> = apply {
+        if (this is Error) {
             block(message)
         }
     }

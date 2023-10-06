@@ -124,8 +124,9 @@ fun TopMessage()
                         .align(Alignment.CenterHorizontally))
     }
     Text(
-            text = "Forgot Password?",
+            text = "FORGOT PASSWORD?",
             style = typography.h4,
+            fontSize = 32.sp,
             modifier = Modifier
                     .padding(horizontal = 16.dp , vertical = 16.dp)
                     .fillMaxWidth(),
@@ -174,7 +175,7 @@ fun ForgotForm(
                     .fillMaxWidth()
                     .height(85.dp)
                     .padding(vertical = 16.dp , horizontal = 16.dp) ,
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff348252)) ,
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
             shape = RoundedCornerShape(25.dp)
           )
     {

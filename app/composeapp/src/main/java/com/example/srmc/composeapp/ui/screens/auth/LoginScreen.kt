@@ -102,7 +102,7 @@ fun LoginContent(
     }
     Column(modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 50.dp , horizontal = 20.dp)
+            .padding(horizontal = 20.dp)
             .background(MaterialTheme.colors.surface)
             .verticalScroll(rememberScrollState()))
     {
@@ -123,7 +123,7 @@ fun LoginContent(
 @Composable
 fun TopGreeting()
 {
-    Column(Modifier.fillMaxWidth())
+    Column(Modifier.fillMaxWidth().padding(top = 50.dp))
     {
         Image(
                 painter =  painterResource(id = R.drawable.app_logo) ,
@@ -137,8 +137,8 @@ fun TopGreeting()
 
     Text(
             text = "WELCOME" ,
-            style = typography.h2 ,
-            fontWeight = FontWeight.W500,
+            style = typography.h4 ,
+            fontSize = 42.sp,
             modifier = Modifier
                     .padding(horizontal = 16.dp , vertical = 20.dp)
                     .fillMaxWidth() ,
@@ -202,7 +202,7 @@ fun LoginForm(
                     .fillMaxWidth()
                     .height(85.dp)
                     .padding(vertical = 16.dp , horizontal = 16.dp) ,
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff348252)) ,
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
             shape = RoundedCornerShape(25.dp))
     {
         Text(text = "Log in" , color = Color.White , style = typography.h6)

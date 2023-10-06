@@ -36,22 +36,22 @@ val typography = Typography(
                       ),
         h4 = TextStyle(
                 fontFamily = poppins,
-                fontWeight = FontWeight.W600,
+                fontWeight = FontWeight.W500,
                 fontSize = 30.sp
                       ),
         h5 = TextStyle(
                 fontFamily = poppins,
-                fontWeight = FontWeight.W600,
+                fontWeight = FontWeight.W500,
                 fontSize = 24.sp
                       ),
         h6 = TextStyle(
                 fontFamily = poppins,
-                fontWeight = FontWeight.W600,
+                fontWeight = FontWeight.W500,
                 fontSize = 20.sp
                       ),
         subtitle1 = TextStyle(
                 fontFamily = inter,
-                fontWeight = FontWeight.W600,
+                fontWeight = FontWeight.W500,
                 fontSize = 16.sp
                              ),
         subtitle2 = TextStyle(

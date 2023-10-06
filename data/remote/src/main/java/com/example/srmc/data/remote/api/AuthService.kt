@@ -15,15 +15,15 @@ import retrofit2.http.POST
 interface AuthService
 {
     @Headers("Accept: application/json" , "X-Requested-With: XMLHttpRequest")
-    @POST("login/mobile")
+    @POST("/login/mobile")
     suspend fun login(@Body authRequest : LoginRequest) : Response<AuthResponse>
 
     @Headers("Accept: application/json" , "X-Requested-With: XMLHttpRequest")
-    @POST("register")
+    @POST("/register")
     suspend fun register(@Body authRequest : RegisterRequest) : Response<RegisterResponse>
 
     @Headers("Accept: application/json" , "X-Requested-With: XMLHttpRequest")
-    @POST("password-reset")
+    @POST("/password-reset")
     suspend fun forgotPass(@Body authRequest : ForgotRequest) : Response<ForgotResponse>
 
 }

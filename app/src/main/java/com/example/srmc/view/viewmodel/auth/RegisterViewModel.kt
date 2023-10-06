@@ -9,9 +9,6 @@ import com.example.srmc.utils.validator.AuthValidator
 class RegisterViewModel @Inject constructor()
     : BaseViewModel<RegisterState>(initialState = RegisterState())
 {
-    fun setUsername(username : String) {
-        setState { state -> state.copy(username = username) }
-    }
 
     fun setEmail(email : String) {
         setState { state -> state.copy(email = email) }
@@ -30,12 +27,10 @@ class RegisterViewModel @Inject constructor()
     }
 
     private fun validateCredentials(): Boolean {
-        val username = currentState.username
         val email = currentState.email
         val password = currentState.password
         val confirmPassword = currentState.confirmPassword
 
-        val isValidUsername = AuthValidator.isValidUsername(username)
         val isValidEmail = AuthValidator.isValidEmail(email)
         val isValidPassword = AuthValidator.isValidPassword(password)
         val arePasswordAndConfirmPasswordSame = AuthValidator.isPasswordAndConfirmPasswordSame(
@@ -44,13 +39,12 @@ class RegisterViewModel @Inject constructor()
 
         setState { state ->
             state.copy(
-                    isValidUsername = isValidUsername,
                     isValidEmail = isValidEmail,
                     isValidPassword = isValidPassword,
                     isValidConfirmPassword = arePasswordAndConfirmPasswordSame
                       )
         }
 
-        return isValidUsername && isValidEmail && isValidPassword && arePasswordAndConfirmPasswordSame
+        return isValidEmail && isValidPassword && arePasswordAndConfirmPasswordSame
     }
 }

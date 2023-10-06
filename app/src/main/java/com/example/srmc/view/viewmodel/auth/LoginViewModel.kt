@@ -1,5 +1,6 @@
 package com.example.srmc.view.viewmodel.auth
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.srmc.core.repository.AuthRepository
 import com.example.srmc.view.state.auth.LoginState
@@ -30,13 +31,14 @@ class LoginViewModel @Inject constructor(
         setState { state -> state.copy(password = password) }
     }
 
-    fun login()
-    {
+    fun login() {
         viewModelScope.launch {
             val email = currentState.email
             val password = currentState.password
 
             setState { state -> state.copy(isLoading = true) }
+
+            Log.d("LoginViewModel", "Logging in with email: $email")
 
             val response = loginRepository.getUserByEmailAndPassword(email, password)
 
@@ -46,45 +48,58 @@ class LoginViewModel @Inject constructor(
                     state.copy(
                             isLoading = false,
                             isLoggedIn = true,
-                            error = null)
+                            error = null
+                              )
                 }
             }.onNotFound { message ->
+                Log.d("LoginViewModel", "Login failed with not found: $message")
                 setState { state ->
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = message)
+                            error = "Login failed: $message"
+                              )
                 }
             }.onForbidden { message ->
+                Log.d("LoginViewModel", "Login failed with forbidden: $message")
                 setState { state ->
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = message)
+                            error = "Login failed: $message"
+                              )
                 }
             }.onUnprocessable { message ->
+                Log.d("LoginViewModel", "Login failed with unprocessable: $message")
                 setState { state ->
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = message)
+                            error = "Login failed: $message"
+                              )
                 }
             }.onServerError { message ->
+                Log.d("LoginViewModel", "Login failed with server error: $message")
                 setState { state->
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = message)
+                            error = "Login failed: $message"
+                              )
                 }
             }.onError { message ->
+                Log.e("LoginViewModel", "Login failed with error: $message")
                 setState { state->
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = "Something went wrong, please try again")
+                            error = "Something went wrong, please try again"
+                              )
                 }
             }
         }
     }
+
+
 
 }

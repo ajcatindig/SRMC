@@ -2,8 +2,6 @@ package com.example.srmc.utils.validator
 
 object AuthValidator {
 
-    /** [username] */
-    fun isValidUsername(username: String): Boolean = username.trim().length in (1..30)
 
     /** [email] */
     val EMAIL_REGEX = "^[A-Za-z](.*)([@]{1})(.{1,})(\\.)(.{1,})"

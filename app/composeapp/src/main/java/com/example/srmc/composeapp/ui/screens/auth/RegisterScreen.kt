@@ -70,8 +70,6 @@ fun RegisterScreen(
 
     RegisterContent(
             isLoading = state.isLoading ,
-            username =  state.username,
-            onUsernameChange =  viewModel::setUsername,
             email =  state.email,
             onEmailChange =  viewModel::setEmail,
             password =  state.password,
@@ -81,7 +79,6 @@ fun RegisterScreen(
             isValidConfirmPassword =  state.isValidConfirmPassword ?: true,
             onNavigateUp = onNavigateUp ,
             onSignUpClick = viewModel::register ,
-            isValidUsername =  state.isValidUsername ?: true,
             isValidPassword =  state.isValidPassword ?: true,
             isValidEmail =  state.isValidEmail ?: true,
             isSuccess =  state.isSuccess,
@@ -91,8 +88,6 @@ fun RegisterScreen(
 @Composable
 fun RegisterContent(
         isLoading : Boolean,
-        username : String,
-        onUsernameChange : (String) -> Unit,
         email : String,
         onEmailChange : (String) -> Unit,
         password : String,
@@ -102,7 +97,6 @@ fun RegisterContent(
         isValidConfirmPassword : Boolean,
         onNavigateUp : () -> Unit,
         onSignUpClick : () -> Unit,
-        isValidUsername : Boolean,
         isValidPassword : Boolean,
         isValidEmail : Boolean,
         isSuccess : String?,
@@ -122,22 +116,19 @@ fun RegisterContent(
 
     Column(modifier = Modifier
             .fillMaxSize()
-            .padding(vertical = 40.dp , horizontal = 20.dp)
+            .padding(horizontal = 20.dp)
             .background(MaterialTheme.colors.surface)
             .verticalScroll(rememberScrollState()))
     {
-        Text(text = "Create an Account" ,
-             fontWeight = FontWeight.ExtraBold ,
-             fontSize = 35.sp ,
+        Text(text = "CREATE AN ACCOUNT" ,
+             style = typography.h4,
+             fontSize = 36.sp ,
              textAlign = TextAlign.Center,
              modifier = Modifier
-                     .padding(start = 16.dp , end = 16.dp , top = 60.dp , bottom = 16.dp)
+                     .padding(start = 16.dp , end = 16.dp , top = 80.dp , bottom = 16.dp)
                      .fillMaxWidth())
 
         RegisterForm(
-                username = username ,
-                onUsernameChange = onUsernameChange ,
-                isValidUsername =  isValidUsername,
                 email =  email,
                 onEmailChange =  onEmailChange,
                 isValidEmail =  isValidEmail,
@@ -155,9 +146,6 @@ fun RegisterContent(
 
 @Composable
 fun RegisterForm(
-        username : String ,
-        onUsernameChange : (String) -> Unit ,
-        isValidUsername : Boolean ,
         email : String ,
         onEmailChange : (String) -> Unit ,
         isValidEmail : Boolean ,
@@ -172,42 +160,12 @@ fun RegisterForm(
     val focusManager = LocalFocusManager.current
     var isPasswordVisible by remember { mutableStateOf(false) }
     val isValidate by derivedStateOf {
-        email.isNotBlank() && password.isNotBlank() && username.isNotBlank() && confirmPassword.isNotBlank()
+        email.isNotBlank() && password.isNotBlank() && confirmPassword.isNotBlank()
     }
     val helperText = ""
 
     Column(
             Modifier.padding(start = 16.dp , top = 32.dp , end = 16.dp , bottom = 16.dp)) {
-        /** [username]*/
-        OutlinedTextField(value = username ,
-                          onValueChange = onUsernameChange ,
-                          label = { Text(text = "Username") } ,
-                          modifier = Modifier
-                                  .fillMaxWidth()
-                                  .padding(vertical = 8.dp) ,
-                          leadingIcon = { Icon(Icons.Outlined.Person , "") } ,
-                          textStyle = TextStyle(
-                                  color = MaterialTheme.colors.onPrimary , fontSize = 16.sp
-                                               ) ,
-                          shape = RoundedCornerShape(25.dp) ,
-                          keyboardOptions = KeyboardOptions(
-                                  keyboardType = KeyboardType.Email , imeAction = ImeAction.Next
-                                                           ) ,
-                          keyboardActions = KeyboardActions(onNext = {
-                              focusManager.moveFocus(focusDirection = FocusDirection.Down)
-                          }) ,
-                          singleLine = true ,
-                          isError = ! isValidUsername
-                         )
-        if (helperText.isEmpty())
-        {
-            Spacer(modifier = Modifier.padding(1.dp))
-            Text(
-                    stringResource(id = R.string.message_field_username_invalid) ,
-                    style = MaterialTheme.typography.caption ,
-                    fontStyle = FontStyle.Italic
-                )
-        }
 
         /** [email]*/
         OutlinedTextField(value = email ,
@@ -320,7 +278,7 @@ fun RegisterForm(
                        .fillMaxWidth()
                        .height(85.dp)
                        .padding(vertical = 16.dp) ,
-               colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff348252)) ,
+               colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
                shape = RoundedCornerShape(25.dp))
         {
             Text(text = "Sign up" , color = Color.White , style = typography.h6)
@@ -333,7 +291,7 @@ private fun LoginLink(modifier : Modifier, onLoginClick : () -> Unit)
 {
     Text(
             text = buildAnnotatedString {
-                append("Already have an account? Login")
+                append("Already have an account? Log in")
                 addStyle(SpanStyle(color = Color(0xff15C3DD)) , 24 , this.length)
             },
             style = typography.subtitle1,
@@ -347,8 +305,6 @@ private fun LoginLink(modifier : Modifier, onLoginClick : () -> Unit)
 fun PreviewRegisterContent() = SRMCPreview {
     RegisterContent(
             isLoading = false ,
-            username =  "johndoe",
-            onUsernameChange =  {},
             email =  "sample@email.com",
             onEmailChange =  {},
             password =  "password",
@@ -358,7 +314,6 @@ fun PreviewRegisterContent() = SRMCPreview {
             isValidConfirmPassword =  false,
             onNavigateUp = {} ,
             onSignUpClick = {} ,
-            isValidUsername = false ,
             isValidPassword =  false,
             isValidEmail =  false,
             error = null,

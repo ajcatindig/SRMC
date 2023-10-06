@@ -1,5 +1,6 @@
 package com.example.srmc.repository
 
+import android.util.Log
 import com.example.srmc.core.model.AuthCredential
 import com.example.srmc.core.model.ForgotResult
 import com.example.srmc.core.model.LoginResult
@@ -28,65 +29,35 @@ class AuthRepositoryImpl @Inject internal constructor(
             password_confirmation: String
     ): Either<RegisterResult>
     {
-        return runCatching {
-            val registerResponse = authService.register(
-                    RegisterRequest(username, email, password, password_confirmation)).getResponse()
-
-            val apiStatus = registerResponse.status
-
-            val eitherResult = when (apiStatus) {
-                Status.SUCCESS -> Either.success(RegisterResult(registerResponse.message.toString()))
-                Status.NOT_FOUND -> Either.notFound(registerResponse.message.toString())
-                Status.FORBIDDEN -> Either.forbidden(registerResponse.message.toString())
-                Status.UNPROCESSABLE -> Either.unprocessable(registerResponse.message.toString())
-                Status.SERVER_ERROR -> Either.serverError(registerResponse.message.toString())
-                else -> Either.error(registerResponse.message.toString())
-            }
-
-            eitherResult
-        }.getOrDefault(Either.error("Something went wrong!"))
+        TODO()
     }
 
 
     override suspend fun getUserByEmailAndPassword(
-            email : String ,
-            password : String
-    ) : Either<AuthCredential>
+            email: String,
+            password: String): Either<AuthCredential>
     {
         return runCatching {
             val authResponse = authService.login(LoginRequest(email, password)).getResponse()
 
-            val apiStatus = authResponse.status
-
-            val eitherResult = when(apiStatus) {
-                Status.SUCCESS -> Either.success(AuthCredential(authResponse.token!!))
-                Status.NOT_FOUND -> Either.notFound(authResponse.message.toString())
-                Status.FORBIDDEN -> Either.forbidden(authResponse.message.toString())
-                Status.UNPROCESSABLE -> Either.unprocessable(authResponse.message.toString())
-                Status.SERVER_ERROR -> Either.serverError(authResponse.message.toString())
+            when(authResponse.status) {
+                200 -> Either.success(AuthCredential(authResponse.token!!))
+                403 -> Either.forbidden(authResponse.message.toString())
+                404 -> Either.notFound(authResponse.message.toString())
+                422 -> Either.unprocessable(authResponse.message.toString())
+                500 -> Either.serverError(authResponse.message.toString())
                 else -> Either.error(authResponse.message.toString())
             }
-            eitherResult
         }.getOrDefault(Either.error("Something went wrong!"))
     }
 
+
+
+
+
     override suspend fun forgotPassword(email : String) : Either<ForgotResult>
     {
-        return runCatching {
-            val forgotResponse = authService.forgotPass(ForgotRequest(email)).getResponse()
-
-            val apiStatus = forgotResponse.status
-
-            val eitherResult = when(apiStatus) {
-                Status.SUCCESS -> Either.success(ForgotResult(forgotResponse.message.toString()))
-                Status.NOT_FOUND -> Either.notFound(forgotResponse.message.toString())
-                Status.FORBIDDEN -> Either.forbidden(forgotResponse.message.toString())
-                Status.UNPROCESSABLE -> Either.unprocessable(forgotResponse.message.toString())
-                Status.SERVER_ERROR -> Either.serverError(forgotResponse.message.toString())
-                else -> Either.error(forgotResponse.message.toString())
-            }
-            eitherResult
-        }.getOrDefault(Either.error("Something went wrong!"))
+        TODO()
     }
 
 }

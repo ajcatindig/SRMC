@@ -13,9 +13,9 @@ fun MainNavGraph(navController : NavHostController)
     NavHost(
             navController = navController,
             route = Graph.HOME,
-            startDestination = BottomBarHomeItem.Home.route)
+            startDestination = BottomBarHomeItem.Doctors.route)
     {
-        composable(route = BottomBarHomeItem.Home.route)
+        composable(route = BottomBarHomeItem.Doctors.route)
         {
             HomeScreen()
         }

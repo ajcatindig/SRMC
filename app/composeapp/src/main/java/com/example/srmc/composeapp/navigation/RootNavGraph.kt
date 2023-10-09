@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import com.example.srmc.composeapp.ui.screens.home.HomeScreen
+import com.example.srmc.composeapp.ui.screens.main.MainScreen
 
 @Composable
 fun RootNavGraph(navController : NavHostController)
@@ -15,7 +16,7 @@ fun RootNavGraph(navController : NavHostController)
     {
         authNavGraph(navController = navController)
         composable(route = Graph.HOME) {
-            HomeScreen()
+            MainScreen()
         }
     }
 }

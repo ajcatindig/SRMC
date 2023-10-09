@@ -31,6 +31,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -49,6 +50,7 @@ import com.example.srmc.composeapp.R
 import com.example.srmc.composeapp.component.dialog.FailureDialog
 import com.example.srmc.composeapp.component.dialog.LoaderDialog
 import com.example.srmc.composeapp.ui.theme.typography
+import com.example.srmc.composeapp.utils.IntentUtils
 import com.example.srmc.composeapp.utils.SRMCPreview
 import com.example.srmc.composeapp.utils.collectState
 import com.example.srmc.view.viewmodel.auth.LoginViewModel
@@ -102,7 +104,7 @@ fun LoginContent(
     }
     Column(modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp)
+            .padding(horizontal = 16.dp)
             .background(MaterialTheme.colors.surface)
             .verticalScroll(rememberScrollState()))
     {
@@ -116,7 +118,7 @@ fun LoginContent(
 
         ForgotPasswordLink(Modifier.align(Alignment.CenterHorizontally), onForgotClick = onForgotClick)
 
-        SignUpLink(Modifier.align(Alignment.CenterHorizontally), onSignUpClick = onSignUpClick)
+        SignUpLink(Modifier.align(Alignment.CenterHorizontally))
     }
 }
 
@@ -224,8 +226,11 @@ fun ForgotPasswordLink(modifier : Modifier, onForgotClick : () -> Unit)
 }
 
 @Composable
-fun SignUpLink(modifier : Modifier, onSignUpClick : () -> Unit)
+fun SignUpLink(modifier : Modifier)
 {
+    val context = LocalContext.current
+    val visitUrl = "https://srmc-front.mcbroad.com/register"
+
     Text(text = buildAnnotatedString {
         append("Don't have an account? Sign up")
         addStyle(SpanStyle(color = Color(0xff15C3DD)), start = 23, this.length)
@@ -234,7 +239,7 @@ fun SignUpLink(modifier : Modifier, onSignUpClick : () -> Unit)
          style = typography.subtitle1,
          modifier = modifier
                  .padding(vertical = 50.dp , horizontal = 16.dp)
-                 .clickable(onClick = onSignUpClick))
+                 .clickable(onClick = { IntentUtils.launchBrowser(context, visitUrl) }))
 }
 
 @Preview

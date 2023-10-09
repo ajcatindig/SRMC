@@ -120,7 +120,7 @@ fun TopMessage()
                 contentDescription = "" ,
                 modifier = Modifier
                         .padding(top = 10.dp)
-                        .requiredSize(160.dp)
+                        .requiredSize(200.dp)
                         .align(Alignment.CenterHorizontally))
     }
     Text(
@@ -179,7 +179,7 @@ fun ForgotForm(
             shape = RoundedCornerShape(25.dp)
           )
     {
-        Text(text = "Submit" , color = Color.White , style = typography.h6)
+        Text(text = "Email Password Reset Link" , color = Color.White , style = typography.h6)
     }
 
 }
@@ -187,7 +187,7 @@ fun ForgotForm(
 @Composable
 fun BackToLogin(modifier : Modifier, onBackClick : () -> Unit)
 {
-    IconButton(onClick = onBackClick, modifier.padding(horizontal = 8.dp, vertical = 20.dp))
+    IconButton(onClick = onBackClick, modifier.padding(start = 8.dp, end = 8.dp, top = 30.dp, bottom = 0.dp))
     {
         Icon(Icons.Outlined.ArrowBackIos , contentDescription = "",
              tint = MaterialTheme.colors.onPrimary)

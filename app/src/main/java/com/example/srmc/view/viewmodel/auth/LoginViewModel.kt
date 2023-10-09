@@ -48,7 +48,9 @@ class LoginViewModel @Inject constructor(
                     state.copy(
                             isLoading = false,
                             isLoggedIn = true,
-                            error = null
+                            error = null,
+                            email = "",
+                            password = ""
                               )
                 }
             }.onNotFound { message ->
@@ -57,7 +59,9 @@ class LoginViewModel @Inject constructor(
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = "Login failed: $message"
+                            error = message,
+                            email = "",
+                            password = ""
                               )
                 }
             }.onForbidden { message ->
@@ -66,7 +70,9 @@ class LoginViewModel @Inject constructor(
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = "Login failed: $message"
+                            error = message,
+                            email = "",
+                            password = ""
                               )
                 }
             }.onUnprocessable { message ->
@@ -75,7 +81,9 @@ class LoginViewModel @Inject constructor(
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = "Login failed: $message"
+                            error = message,
+                            email = "",
+                            password = ""
                               )
                 }
             }.onServerError { message ->
@@ -84,7 +92,9 @@ class LoginViewModel @Inject constructor(
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = "Login failed: $message"
+                            error = message,
+                            email = "",
+                            password = ""
                               )
                 }
             }.onError { message ->
@@ -93,7 +103,9 @@ class LoginViewModel @Inject constructor(
                     state.copy(
                             isLoading = false,
                             isLoggedIn = false,
-                            error = "Something went wrong, please try again"
+                            error = "Something went wrong, please try again.",
+                            email = "",
+                            password = ""
                               )
                 }
             }

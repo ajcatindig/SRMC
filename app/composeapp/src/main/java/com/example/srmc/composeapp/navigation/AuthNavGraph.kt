@@ -7,7 +7,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.srmc.composeapp.ui.screens.auth.ForgotScreen
 import com.example.srmc.composeapp.ui.screens.auth.LoginScreen
-import com.example.srmc.composeapp.ui.screens.auth.RegisterScreen
 
 fun NavGraphBuilder.authNavGraph(navController : NavController)
 {
@@ -20,11 +19,6 @@ fun NavGraphBuilder.authNavGraph(navController : NavController)
                     onNavigateToHome = { navController.popBackStack()
                         navController.navigate(Graph.HOME)},
                     onNavigateToForgot = {navController.navigate(AuthScreen.Forgot.route)})
-        }
-        composable(route = AuthScreen.SignUp.route) {
-            RegisterScreen(
-                    onNavigateUp = { navController.navigateUp()},
-                    viewModel = hiltViewModel())
         }
         composable(route = AuthScreen.Forgot.route) {
             ForgotScreen(onNavigateUp = { navController.navigateUp()},

@@ -54,7 +54,7 @@ fun BottomBar(navController : NavHostController) {
     )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
-    val bottomBarHeight = 60.dp
+    val bottomBarHeight = 55.dp
 
     val bottomBarDestination = screens.any { it.route == currentDestination?.route }
     if (bottomBarDestination) {

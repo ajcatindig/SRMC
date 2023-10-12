@@ -134,6 +134,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-compose:$lifecycleVersion"
 
+    // Accompanist
+    implementation "com.google.accompanist:accompanist-swiperefresh:$accompanistVersion"
+
     // Navigation
     implementation "androidx.navigation:navigation-compose:$composeNavVersion"
 

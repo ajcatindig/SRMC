@@ -3,9 +3,8 @@ package com.example.srmc.di
 import com.example.srmc.core.utils.moshi
 import com.example.srmc.data.remote.Constant
 import com.example.srmc.data.remote.api.AuthService
-import com.example.srmc.data.remote.model.response.Status
-import com.squareup.moshi.FromJson
-import com.squareup.moshi.ToJson
+import com.example.srmc.data.remote.api.DoctorService
+import com.example.srmc.data.remote.interceptor.AuthInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,6 +36,15 @@ class NetworkModule {
                 .client(okHttpClientBuilder.build())
                 .build()
                 .create(AuthService::class.java)
+    }
+
+    @Provides
+    fun provideDoctorService(authInterceptor : AuthInterceptor) : DoctorService
+    {
+        return baseRetrofitBuilder
+                .client(okHttpClientBuilder.addInterceptor(authInterceptor).build())
+                .build()
+                .create(DoctorService::class.java)
     }
 
 }

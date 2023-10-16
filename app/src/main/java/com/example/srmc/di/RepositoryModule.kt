@@ -1,7 +1,9 @@
 package com.example.srmc.di
 
 import com.example.srmc.core.repository.AuthRepository
+import com.example.srmc.core.repository.DoctorRepository
 import com.example.srmc.repository.AuthRepositoryImpl
+import com.example.srmc.repository.DoctorRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,6 +15,9 @@ import javax.inject.Qualifier
 interface RepositoryModule {
     @Binds
     fun srmcAuthRepository(srmcAuthRepositoryImpl : AuthRepositoryImpl) : AuthRepository
+
+    @Binds
+    fun srmcDoctorRepository(srmcDoctorRepositoryImpl : DoctorRepositoryImpl) : DoctorRepository
 }
 
 @Qualifier

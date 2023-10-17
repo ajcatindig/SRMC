@@ -21,7 +21,8 @@ fun MainNavGraph(navController : NavHostController)
     {
         composable(route = BottomBarHomeItem.Doctors.route)
         {
-            HomeScreen(viewModel = hiltViewModel())
+            HomeScreen(viewModel = hiltViewModel(),
+            onNavigateToDoctorDetail = {})
         }
 
         composable(route = BottomBarHomeItem.Appointments.route)
@@ -36,7 +37,13 @@ fun MainNavGraph(navController : NavHostController)
 
         composable(route = BottomBarHomeItem.Profile.route)
         {
-            ProfileScreen(viewModel = hiltViewModel())
+            ProfileScreen(
+                    viewModel = hiltViewModel(),
+                    onNavigateToLogin = {
+                        navController.popBackStack()
+                        navController.navigate(Graph.AUTHENTICATION)
+                    },
+                    onAboutAppClick = {})
         }
     }
 }

@@ -7,4 +7,5 @@ data class Doctor(
         val email : String?,
         val contact_number : String?,
         val slots : String?,
-        val type : String?)
+        val type : String?,
+        val profile_photo_path : String?)

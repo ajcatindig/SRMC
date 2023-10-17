@@ -4,10 +4,12 @@ import com.example.srmc.core.model.Dates
 import com.example.srmc.core.model.Doctor
 import com.example.srmc.core.model.Slots
 import kotlinx.coroutines.flow.Flow
+import javax.inject.Singleton
 
 /**
  * Repository for Doctor
  */
+@Singleton
 interface DoctorRepository
 {
     /**

@@ -32,7 +32,7 @@ ext {
     legacySupportVersion = "1.0.0"
     capturableVersion = "1.0.3"
     splashScreenVersion = "1.0.1"
-    glideVersion = "2.2.10"
+    glideVersion = "1.6.1"
     pagingVersion = "3.2.1"
 
 

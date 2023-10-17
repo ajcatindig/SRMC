@@ -20,27 +20,35 @@ import androidx.compose.ui.unit.sp
 import com.example.srmc.composeapp.R
 import com.example.srmc.composeapp.component.ConnectivityStatus
 import com.example.srmc.composeapp.component.anim.LottieAnimation
+import com.example.srmc.composeapp.component.list.DoctorList
 import com.example.srmc.composeapp.component.scaffold.SRMCScaffold
 import com.example.srmc.composeapp.component.scaffold.main.HomeTopBar
 import com.example.srmc.composeapp.ui.theme.typography
 import com.example.srmc.composeapp.utils.collectState
+import com.example.srmc.core.model.Doctor
 import com.example.srmc.view.viewmodel.main.DoctorViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 
 @Composable
-fun HomeScreen(viewModel : DoctorViewModel)
+fun HomeScreen(
+        viewModel : DoctorViewModel,
+        onNavigateToDoctorDetail : (Int) -> Unit)
 {
     val state by viewModel.collectState()
 
     HomeContent(
             isLoading =  state.isLoading,
             isConnectivityAvailable = state.isConnectivityAvailable,
-            onRefresh = {})
+            onRefresh = viewModel::getAllDoctors,
+            data = state.data,
+            onNavigateToDoctorDetail = onNavigateToDoctorDetail)
 }
 
 @Composable
 fun HomeContent(
+        data : List<Doctor>?,
+        onNavigateToDoctorDetail : (Int) -> Unit,
         isLoading : Boolean,
         isConnectivityAvailable : Boolean?,
         error : String? = null,
@@ -60,6 +68,9 @@ fun HomeContent(
                     Column {
                         if (isConnectivityAvailable != null) {
                             ConnectivityStatus(isConnectivityAvailable)
+                        }
+                        if (data != null) {
+                            DoctorList(data) { index -> onNavigateToDoctorDetail(index.id) }
                         }
                         else {
                             Column(modifier = Modifier.fillMaxSize(),

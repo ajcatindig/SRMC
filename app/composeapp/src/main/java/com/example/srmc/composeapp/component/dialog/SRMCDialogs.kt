@@ -25,12 +25,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.example.srmc.composeapp.R
 import com.example.srmc.composeapp.component.anim.LottieAnimation
 import com.example.srmc.composeapp.ui.theme.typography
+import com.example.srmc.composeapp.utils.SRMCPreview
 
 @Composable
 fun LoaderDialog() {
@@ -185,6 +187,16 @@ fun ConfirmationDialog(
                         }
                     }
                 },
-                   )
+        )
     }
+}
+
+@Preview
+@Composable
+fun PreviewLogoutConfirmation() = SRMCPreview {
+    ConfirmationDialog(title =  "Logout?",
+                       message =  "Are you sure you want to logout?",
+                       onConfirmedYes = { /*TODO*/ } ,
+                       onConfirmedNo = { /*TODO*/ },
+                       onDismissed = {})
 }

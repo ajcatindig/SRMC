@@ -1,6 +1,6 @@
 package com.example.srmc.core.repository
 
-import com.example.srmc.core.model.Dates
+import com.example.srmc.core.model.Schedules
 import com.example.srmc.core.model.Doctor
 import com.example.srmc.core.model.Slots
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ interface DoctorRepository
     /**
      * Returns all doctor schedules
      */
-    fun getDoctorSchedules(id : Int) : Flow<Either<List<Dates>>>
+    fun getDoctorSchedules(id : Int) : Flow<Either<List<Schedules>>>
 
     /**
      * Returns all schedule slots

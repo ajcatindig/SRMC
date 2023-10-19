@@ -8,6 +8,6 @@ import retrofit2.http.Headers
 interface UserService
 {
     @Headers("Accept: application/json" , "X-Requested-With: XMLHttpRequest")
-    @GET("api/user")
+    @GET("api/user/mobile")
     suspend fun getUserProfile() : Response<UserResponse>
 }

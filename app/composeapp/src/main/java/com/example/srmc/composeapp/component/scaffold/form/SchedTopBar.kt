@@ -1,4 +1,4 @@
-package com.example.srmc.composeapp.component.scaffold.detail
+package com.example.srmc.composeapp.component.scaffold.form
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,7 +12,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -20,8 +19,8 @@ import com.example.srmc.composeapp.ui.theme.typography
 import com.example.srmc.composeapp.utils.SRMCPreview
 
 @Composable
-fun DoctorDetailTopBar(
-        title : String = "Doctor Profile",
+fun SchedTopBar(
+        title : String = "Select a Date",
         onNavigateUp : (() -> Unit)? = null
                       )
 {
@@ -29,7 +28,7 @@ fun DoctorDetailTopBar(
             title = {
                 Row {
                     Text(text = title ,
-                         textAlign = TextAlign.Center ,
+                         textAlign = TextAlign.Start ,
                          color = MaterialTheme.colors.onPrimary  ,
                          modifier = Modifier.fillMaxWidth() ,
                          style = typography.h5)
@@ -56,5 +55,5 @@ fun DoctorDetailTopBar(
 @Composable
 @Preview
 fun PreviewDoctorTopbar() = SRMCPreview {
-    DoctorDetailTopBar()
+    SchedTopBar()
 }

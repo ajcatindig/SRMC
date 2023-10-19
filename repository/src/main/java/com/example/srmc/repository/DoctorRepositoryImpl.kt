@@ -1,7 +1,7 @@
 package com.example.srmc.repository
 
 import android.util.Log
-import com.example.srmc.core.model.Dates
+import com.example.srmc.core.model.Schedules
 import com.example.srmc.core.model.Doctor
 import com.example.srmc.core.model.Slots
 import com.example.srmc.core.repository.DoctorRepository
@@ -37,7 +37,7 @@ class DoctorRepositoryImpl @Inject internal constructor(
     }
 
 
-    override fun getDoctorSchedules(id : Int) : Flow<Either<List<Dates>>> = flow {
+    override fun getDoctorSchedules(id : Int) : Flow<Either<List<Schedules>>> = flow {
         val doctorScheduleResponse = doctorService.getDoctorSchedules(id).getResponse()
 
         val status = when(doctorScheduleResponse.status) {
@@ -52,7 +52,7 @@ class DoctorRepositoryImpl @Inject internal constructor(
     }
 
 
-    override fun getDoctorSlots(id : Int , date : String) : Flow<Either<List<Slots>>> = flow<Either<List<Slots>>> {
+    override fun getDoctorSlots(id : Int , date : String) : Flow<Either<List<Slots>>> = flow {
         val doctorSlotsResponse = doctorService.getDoctorSlots(id, date).getResponse()
 
         val status = when(doctorSlotsResponse.status) {

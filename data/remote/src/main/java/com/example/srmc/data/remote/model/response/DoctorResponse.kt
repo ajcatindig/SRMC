@@ -1,6 +1,6 @@
 package com.example.srmc.data.remote.model.response
 
-import com.example.srmc.core.model.Dates
+import com.example.srmc.core.model.Schedules
 import com.example.srmc.core.model.Doctor
 import com.example.srmc.core.model.Slots
 
@@ -17,8 +17,8 @@ data class DoctorResponse(
 )
 
 data class DoctorSchedules(
-        val status : Int,
-        val data : List<Dates> = emptyList(),
+        val status : Int ,
+        val data : List<Schedules> = emptyList() ,
         val message : String?
 )
 

@@ -3,12 +3,13 @@ package com.example.srmc.composeapp.navigation
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.example.srmc.composeapp.ui.screens.auth.ForgotScreen
 import com.example.srmc.composeapp.ui.screens.auth.LoginScreen
 
-fun NavGraphBuilder.authNavGraph(navController : NavController)
+fun NavGraphBuilder.authNavGraph(navController : NavHostController)
 {
     navigation(route = Graph.AUTHENTICATION, startDestination = AuthScreen.Login.route)
     {

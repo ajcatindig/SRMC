@@ -1,6 +1,6 @@
 package com.example.srmc.core.model
 
-data class Dates(
+data class Schedules(
         val id : Int,
         val user_id : String?,
         val day_id : String?,

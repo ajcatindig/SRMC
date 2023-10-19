@@ -45,5 +45,7 @@ fun MainNavGraph(navController : NavHostController)
                     },
                     onAboutAppClick = {})
         }
+
+        authNavGraph(navController)
     }
 }

@@ -6,12 +6,18 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
@@ -43,13 +49,14 @@ fun DoctorCard(
             backgroundColor = MaterialTheme.colors.surface,
             modifier = Modifier
                     .padding(8.dp)
-                    .height(270.dp)
+                    .height(310.dp)
                     .clickable { onDoctorClick() },
             elevation = 2.dp)
     {
         Column(
                 modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 16.dp),
+                        .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
+                        .fillMaxSize(1f),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
               )
@@ -57,7 +64,7 @@ fun DoctorCard(
             GlideImage(
                     imageModel =  imageUrl  ,
                     modifier = Modifier
-                            .size(130.dp)
+                            .size(120.dp)
                             .clip(CircleShape) ,
                     loading = {
                         Box(modifier = Modifier.matchParentSize()) {
@@ -83,7 +90,7 @@ fun DoctorCard(
                     }
             )
             Row(
-                    modifier = Modifier.padding(start = 5.dp, end = 5.dp, top = 15.dp),
+                    modifier = Modifier.padding(start = 3.dp, end = 3.dp, top = 15.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                )
@@ -92,7 +99,7 @@ fun DoctorCard(
                      style = typography.h4,
                      fontSize = 16.sp,
                      overflow = TextOverflow.Ellipsis,
-                     maxLines = 2,
+                     maxLines = 1,
                      textAlign = TextAlign.Center)
             }
             Row(
@@ -108,6 +115,24 @@ fun DoctorCard(
                      overflow = TextOverflow.Ellipsis,
                      color = Color.DarkGray,
                      textAlign = TextAlign.Center)
+            }
+            Row(
+                    modifier = Modifier.padding(start = 5.dp, end = 5.dp, top = 15.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+               )
+            {
+                /** [BUTTON]*/
+                Button(
+                        onClick = onDoctorClick ,
+                        modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 5.dp),
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
+                        shape = RoundedCornerShape(25.dp))
+                {
+                    Text(text = "BOOK" , color = Color.White , style = typography.h6, fontSize = 16.sp)
+                }
             }
         }
     }

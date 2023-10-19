@@ -26,7 +26,7 @@ fun AboutAppTopBar(
             title = {
                 Row {
                     Text(text = title ,
-                         textAlign = TextAlign.Center,
+                         textAlign = TextAlign.Start,
                          color = MaterialTheme.colors.onPrimary ,
                          modifier = Modifier.fillMaxWidth() ,
                          style = MaterialTheme.typography.h5)

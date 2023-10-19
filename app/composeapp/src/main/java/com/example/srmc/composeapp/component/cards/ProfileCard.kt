@@ -109,7 +109,7 @@ fun ProfileCard(
                             modifier = Modifier
                                     .padding(start = 16.dp , end = 16.dp , bottom = 8.dp))
                         {
-                            Text(text = "Sample Name" ,
+                            Text(text = data.name ?: "No Name Provided" ,
                                  maxLines = 2 ,
                                  overflow = TextOverflow.Ellipsis ,
                                  style = typography.h5 ,
@@ -120,7 +120,7 @@ fun ProfileCard(
                             modifier = Modifier
                                     .padding(start = 16.dp , end = 16.dp , bottom = 8.dp))
                         {
-                            Text(text = "Sample Email" ,
+                            Text(text = data.email ?: "No Email Provided" ,
                                  maxLines = 2 ,
                                  overflow = TextOverflow.Ellipsis ,
                                  style = typography.subtitle1 ,
@@ -131,7 +131,7 @@ fun ProfileCard(
                             modifier = Modifier
                                     .padding(start = 16.dp , end = 16.dp , bottom = 8.dp))
                         {
-                            Text(text = "Sample Number" ,
+                            Text(text = data.contact_number ?: "No Number Provided" ,
                                  maxLines = 2 ,
                                  overflow = TextOverflow.Ellipsis ,
                                  style = typography.subtitle1 ,

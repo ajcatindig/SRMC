@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -104,7 +105,7 @@ fun LoginContent(
     }
     Column(modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 16.dp)
+            .fillMaxSize()
             .background(MaterialTheme.colors.surface)
             .verticalScroll(rememberScrollState()))
     {
@@ -166,7 +167,7 @@ fun LoginForm(
             label = { Text(text = "Email") } ,
             modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp , vertical = 8.dp),
+                    .padding(horizontal = 32.dp , vertical = 8.dp),
             leadingIcon = { Icon(Icons.Outlined.Person , "") } ,
             textStyle = TextStyle(color = MaterialTheme.colors.onPrimary , fontSize = 16.sp) ,
             shape = RoundedCornerShape(25.dp) ,
@@ -181,7 +182,7 @@ fun LoginForm(
             label = { Text(text = "Password") } ,
             modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 16.dp , vertical = 8.dp) ,
+                    .padding(horizontal = 32.dp , vertical = 8.dp) ,
             leadingIcon = { Icon(Icons.Outlined.Lock, "") } ,
             textStyle = TextStyle(color = MaterialTheme.colors.onPrimary, fontSize = 16.sp) ,
             shape = RoundedCornerShape(25.dp) ,
@@ -203,7 +204,7 @@ fun LoginForm(
             modifier = Modifier
                     .fillMaxWidth()
                     .height(85.dp)
-                    .padding(vertical = 16.dp , horizontal = 16.dp) ,
+                    .padding(vertical = 16.dp , horizontal = 32.dp) ,
             colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
             shape = RoundedCornerShape(25.dp))
     {

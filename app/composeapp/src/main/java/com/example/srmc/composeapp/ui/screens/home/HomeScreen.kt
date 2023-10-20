@@ -47,7 +47,7 @@ fun HomeScreen(
 
 @Composable
 fun HomeContent(
-        data : List<Doctor>?,
+        data : List<Doctor>,
         onNavigateToDoctorDetail : (Int) -> Unit,
         isLoading : Boolean,
         isConnectivityAvailable : Boolean?,
@@ -63,14 +63,14 @@ fun HomeContent(
                 SwipeRefresh(
                         state = rememberSwipeRefreshState(isLoading) ,
                         onRefresh = onRefresh,
-                        swipeEnabled = isConnectivityAvailable === true)
+                        swipeEnabled = isConnectivityAvailable == true)
                 {
                     Column {
                         if (isConnectivityAvailable != null) {
                             ConnectivityStatus(isConnectivityAvailable)
                         }
                         if (data != null) {
-                            DoctorList(data) { index -> onNavigateToDoctorDetail(index.id) }
+                            DoctorList(data) { index -> onNavigateToDoctorDetail(index.id!!) }
                         }
                         else {
                             Column(modifier = Modifier.fillMaxSize(),

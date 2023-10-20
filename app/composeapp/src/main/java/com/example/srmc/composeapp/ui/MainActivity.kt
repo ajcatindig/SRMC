@@ -18,6 +18,9 @@ import javax.inject.Inject
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.example.srmc.R
+import com.example.srmc.view.viewmodel.detail.DoctorDetailViewModel
+import com.example.srmc.view.viewmodel.form.SchedulesViewModel
+import com.example.srmc.view.viewmodel.form.SlotsViewModel
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
@@ -33,6 +36,9 @@ class MainActivity : AppCompatActivity()
     @InstallIn(ActivityComponent::class)
     interface ViewModelFactoryProvider{
 
+        fun scheduleViewModelFactory() : SchedulesViewModel.Factory
+        fun slotsViewModelFactory() : SlotsViewModel.Factory
+        fun doctorViewModelFactory() : DoctorDetailViewModel.Factory
     }
     override fun onCreate(savedInstanceState : Bundle?)
     {

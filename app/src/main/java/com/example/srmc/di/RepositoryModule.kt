@@ -1,8 +1,10 @@
 package com.example.srmc.di
 
+import com.example.srmc.core.repository.AppointmentRepository
 import com.example.srmc.core.repository.AuthRepository
 import com.example.srmc.core.repository.DoctorRepository
 import com.example.srmc.core.repository.UserRepository
+import com.example.srmc.repository.AppointmentRepositoryImpl
 import com.example.srmc.repository.AuthRepositoryImpl
 import com.example.srmc.repository.DoctorRepositoryImpl
 import com.example.srmc.repository.UserRepositoryImpl
@@ -25,6 +27,10 @@ interface RepositoryModule {
     @Binds
     @RemoteRepository
     fun srmcUserRepository(srmcUserRepositoryImpl : UserRepositoryImpl) : UserRepository
+
+    @Binds
+    @RemoteRepository
+    fun srmcAppointmentRepository(srmcAppointmentRepositoryImpl : AppointmentRepositoryImpl) : AppointmentRepository
 }
 
 @Qualifier

@@ -93,7 +93,7 @@ fun ProfileContent(
                 SwipeRefresh(
                         state = rememberSwipeRefreshState(isLoading) ,
                         onRefresh = onRefresh,
-                        swipeEnabled = isConnectivityAvailable === true)
+                        swipeEnabled = isConnectivityAvailable == true)
                 {
                     Column(modifier = Modifier.fillMaxSize()
                             .background(MaterialTheme.colors.surface))

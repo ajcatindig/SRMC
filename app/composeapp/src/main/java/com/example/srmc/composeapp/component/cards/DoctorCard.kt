@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,6 +24,8 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -44,18 +47,19 @@ fun DoctorCard(
         doctorTitle : String?,
         onDoctorClick : () -> Unit)
 {
+
     Card(
             shape = RoundedCornerShape(10.dp),
             backgroundColor = MaterialTheme.colors.surface,
             modifier = Modifier
                     .padding(8.dp)
-                    .height(310.dp)
-                    .clickable { onDoctorClick() },
+                    .height(300.dp)
+                    .clickable{ onDoctorClick() },
             elevation = 2.dp)
     {
         Column(
                 modifier = Modifier
-                        .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
+                        .padding(start = 16.dp , end = 16.dp , top = 16.dp , bottom = 16.dp)
                         .fillMaxSize(1f),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -131,19 +135,12 @@ fun DoctorCard(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
                         shape = RoundedCornerShape(25.dp))
                 {
-                    Text(text = "BOOK" , color = Color.White , style = typography.h6, fontSize = 16.sp)
+                    Text(text = "VIEW DOCTOR" ,
+                         color = Color.White ,
+                         style = typography.h6,
+                         fontSize = 16.sp)
                 }
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun PreviewDoctorCard() = SRMCPreview {
-    DoctorCard(
-            imageUrl = "https://image.civitai.com/xG1nkqKTMzGDvpLrqFT7WA/4a287732-d033-48b6-c0a0-d3553c8bff00/width=1200/4a287732-d033-48b6-c0a0-d3553c8bff00.jpeg",
-            doctorName =  "Johnny Sins",
-            doctorTitle = "Neurosurgeon",
-            onDoctorClick = {})
 }

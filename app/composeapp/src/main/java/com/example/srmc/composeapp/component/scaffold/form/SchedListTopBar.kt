@@ -13,13 +13,11 @@ import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.srmc.composeapp.ui.theme.typography
-import com.example.srmc.composeapp.utils.SRMCPreview
 
 @Composable
-fun SchedTopBar(
+fun SchedListTopBar(
         title : String = "Select a Date",
         onNavigateUp : (() -> Unit)? = null
                       )
@@ -29,7 +27,7 @@ fun SchedTopBar(
                 Row {
                     Text(text = title ,
                          textAlign = TextAlign.Start ,
-                         color = MaterialTheme.colors.onPrimary  ,
+                         color = MaterialTheme.colors.onPrimary ,
                          modifier = Modifier.fillMaxWidth() ,
                          style = typography.h5)
                 }
@@ -42,7 +40,7 @@ fun SchedTopBar(
                         Icon(
                                 imageVector = Icons.Filled.ArrowBackIos ,
                                 contentDescription = "Back" ,
-                                tint = MaterialTheme.colors.onPrimary  )
+                                tint = MaterialTheme.colors.onPrimary)
                     }
                 }
                 navIcon
@@ -50,10 +48,4 @@ fun SchedTopBar(
             backgroundColor = MaterialTheme.colors.surface ,
             contentColor = MaterialTheme.colors.onPrimary ,
             elevation = 0.dp)
-}
-
-@Composable
-@Preview
-fun PreviewDoctorTopbar() = SRMCPreview {
-    SchedTopBar()
 }

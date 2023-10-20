@@ -18,6 +18,11 @@ interface DoctorRepository
     fun getAllDoctors() : Flow<Either<List<Doctor>>>
 
     /**
+     * Returns doctor by ID
+     */
+    fun getDoctorById(id : Int) : Flow<Doctor>
+
+    /**
      * Returns all doctor schedules
      */
     fun getDoctorSchedules(id : Int) : Flow<Either<List<Schedules>>>

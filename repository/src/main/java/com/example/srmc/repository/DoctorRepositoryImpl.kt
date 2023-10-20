@@ -36,6 +36,18 @@ class DoctorRepositoryImpl @Inject internal constructor(
         emit(Either.error("An unknown error occurred"))
     }
 
+    override fun getDoctorById(id : Int) : Flow<Doctor> = flow<Doctor> {
+        val doctorResponse = doctorService.getDoctorById(id).getResponse()
+
+        when(doctorResponse.status) {
+            200 -> Either.success(emit(doctorResponse.data))
+            else -> Either.error(doctorResponse.message!!)
+        }
+        Log.d("Data", "${doctorResponse.data}")
+    }.catch {
+        Log.e("DoctorRepositoryImpl", "catch ${it.message!!}")
+    }
+
 
     override fun getDoctorSchedules(id : Int) : Flow<Either<List<Schedules>>> = flow {
         val doctorScheduleResponse = doctorService.getDoctorSchedules(id).getResponse()

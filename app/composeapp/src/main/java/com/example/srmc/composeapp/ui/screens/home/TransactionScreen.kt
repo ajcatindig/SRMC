@@ -54,7 +54,7 @@ fun TransactionContent(
                 SwipeRefresh(
                         state = rememberSwipeRefreshState(isLoading) ,
                         onRefresh = onRefresh,
-                        swipeEnabled = isConnectivityAvailable === true)
+                        swipeEnabled = isConnectivityAvailable == true)
                 {
                     Column {
                         if (isConnectivityAvailable != null) {

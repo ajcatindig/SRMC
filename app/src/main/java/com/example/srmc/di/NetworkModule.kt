@@ -2,6 +2,7 @@ package com.example.srmc.di
 
 import com.example.srmc.core.utils.moshi
 import com.example.srmc.data.remote.Constant
+import com.example.srmc.data.remote.api.AppointmentService
 import com.example.srmc.data.remote.api.AuthService
 import com.example.srmc.data.remote.api.DoctorService
 import com.example.srmc.data.remote.api.UserService
@@ -13,6 +14,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
 import java.util.concurrent.TimeUnit
 
 @Module
@@ -55,6 +57,15 @@ class NetworkModule {
                 .client(okHttpClientBuilder.addInterceptor(authInterceptor).build())
                 .build()
                 .create(UserService::class.java)
+    }
+
+    @Provides
+    fun provideAppointmentService(authInterceptor : AuthInterceptor) : AppointmentService
+    {
+        return baseRetrofitBuilder
+                .client(okHttpClientBuilder.addInterceptor(authInterceptor).build())
+                .build()
+                .create(AppointmentService::class.java)
     }
 
 }

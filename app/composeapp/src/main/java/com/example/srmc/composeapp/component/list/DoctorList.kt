@@ -10,7 +10,7 @@ import com.example.srmc.composeapp.component.cards.DoctorCard
 import com.example.srmc.core.model.Doctor
 
 @Composable
-fun DoctorList(data : List<Doctor?>, onClick : (Doctor) -> Unit)
+fun DoctorList(data : List<Doctor>, onClick : (Doctor) -> Unit)
 {
     LazyVerticalGrid(
             columns = GridCells.Fixed(2) ,
@@ -20,13 +20,13 @@ fun DoctorList(data : List<Doctor?>, onClick : (Doctor) -> Unit)
                 items = data,
                 itemContent = { index ->
                     DoctorCard(
-                            imageUrl = index?.profile_photo_path ,
-                            doctorName = index?.name.orEmpty(),
-                            doctorTitle = index?.title,
-                            onDoctorClick = { onClick(index!!) }
+                            imageUrl = index.profile_photo_path ,
+                            doctorName = index.name.orEmpty(),
+                            doctorTitle = index.title,
+                            onDoctorClick = { onClick(index) }
                     )
                 },
-                key = { Triple(it?.id, it?.name, it?.title) }
+                key = { Triple(it.id, it.name, it.title) }
              )
     }
 }

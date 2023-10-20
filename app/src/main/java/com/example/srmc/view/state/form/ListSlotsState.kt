@@ -1,12 +1,12 @@
-package com.example.srmc.view.state.detail
+package com.example.srmc.view.state.form
 
 import com.example.srmc.core.model.Schedules
+import com.example.srmc.core.model.Slots
 import com.example.srmc.view.state.State
-import java.lang.Error
 
-data class ListSchedState(
+data class ListSlotsState(
         val isLoading : Boolean = false ,
-        val data : List<Schedules> = emptyList() ,
+        val data : List<Slots> = emptyList() ,
         val error : String? = null ,
         val isConnectivityAvailable : Boolean? = null
-) : State
+): State

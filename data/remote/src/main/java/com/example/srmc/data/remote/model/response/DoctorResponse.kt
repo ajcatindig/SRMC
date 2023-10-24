@@ -22,6 +22,12 @@ data class DoctorSchedules(
         val message : String?
 )
 
+data class DoctorSchedule(
+        val status : Int,
+        val data : Schedules,
+        val message : String?
+)
+
 data class DoctorSlots(
         val status : Int,
         val data : List<Slots> = emptyList(),

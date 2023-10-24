@@ -25,6 +25,8 @@ val darkOrange = Color(0xFFB96601)
 
 val buttonGreen = Color(0xff348252)
 val buttonRed = Color(0xffC42929)
+val darkRed = Color(0xFF8B0000)
+val darkYellow = Color(0xFFF4C430)
 
 @Composable
 fun getTextFieldHintColor(): Color = if (isSystemInDarkTheme()) Color.LightGray else Color.Gray

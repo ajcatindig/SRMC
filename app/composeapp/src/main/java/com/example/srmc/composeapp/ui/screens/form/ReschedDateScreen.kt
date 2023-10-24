@@ -32,61 +32,57 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.srmc.composeapp.component.ConnectivityStatus
 import com.example.srmc.composeapp.component.dialog.FailureDialog
 import com.example.srmc.composeapp.component.dialog.LoaderDialog
-import com.example.srmc.composeapp.component.list.ScheduleList
-import com.example.srmc.composeapp.component.scaffold.SRMCScaffold
-import com.example.srmc.composeapp.component.scaffold.form.SchedListTopBar
 import com.example.srmc.composeapp.ui.theme.typography
 import com.example.srmc.composeapp.utils.collectState
+import com.example.srmc.core.model.Appointments
 import com.example.srmc.core.model.Doctor
 import com.example.srmc.core.model.Schedules
+import com.example.srmc.view.viewmodel.detail.AppointmentDetailViewModel
 import com.example.srmc.view.viewmodel.detail.DoctorDetailViewModel
-import com.example.srmc.view.viewmodel.form.AppointmentFormViewModel
+import com.example.srmc.view.viewmodel.form.ReschedViewModel
 import com.example.srmc.view.viewmodel.form.SchedulesViewModel
-import com.google.accompanist.swiperefresh.SwipeRefresh
-import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
-
 
 @Composable
-fun DoctorSchedScreen(
-        onNavigateUp : () -> Unit,
-        viewModel1 : DoctorDetailViewModel,
-        viewModel2 : SchedulesViewModel,
-        viewModel3 : AppointmentFormViewModel,
-        onNavigateToSlots : (Int, String) -> Unit)
+fun ReschedDateScreen(
+        onNavigateUp : () -> Unit ,
+        viewModel1 : AppointmentDetailViewModel ,
+        viewModel2 : SchedulesViewModel ,
+        viewModel3 : ReschedViewModel,
+        onNavigateToSlots : (Int, Int, String) -> Unit)
 {
     val state1 by viewModel1.collectState()
     val state2 by viewModel2.collectState()
     val state3 by viewModel3.collectState()
 
-    DoctorSchedFormContent(
-            isLoading = state2.isLoading ,
+    ReschedFormContent(
+            isLoading =  state2.isLoading,
             error =  state2.error,
             onNavigateUp = onNavigateUp ,
-            onNavigateToSlots = onNavigateToSlots,
-            doctor =  state1.data,
-            selectedDoctor =  state3.doctor_id,
-            onSelectedDoctor =  viewModel3::setDoctorId,
+            onNavigateToSlots =  onNavigateToSlots,
+            appointment =  state1.data,
+            selectedAppointment =  state3.id,
+            onSelectedAppointment =  viewModel3::setId,
             schedule =  state2.data,
             selectedDate =  state3.date,
-            onDateChange = viewModel3::setDate)
+            onSelectedDate = viewModel3::setSchedDate,
+            doctor = state1.data.doctor)
 }
 
 @Composable
-fun DoctorSchedFormContent(
-        isLoading : Boolean,
-        error : String?,
-        onNavigateUp : () -> Unit,
-        onNavigateToSlots : (Int, String) -> Unit,
-        doctor : Doctor,
-        selectedDoctor : Int,
-        onSelectedDoctor : (Int) -> Unit,
+fun ReschedFormContent(
+        isLoading : Boolean ,
+        error : String? ,
+        onNavigateUp : () -> Unit ,
+        onNavigateToSlots : (Int, Int, String) -> Unit ,
+        appointment : Appointments,
+        selectedAppointment : Int,
+        onSelectedAppointment : (Int) -> Unit,
         schedule : List<Schedules>,
         selectedDate : String,
-        onDateChange : (String) -> Unit
-)
+        onSelectedDate : (String) -> Unit,
+        doctor : Doctor)
 {
     if (isLoading) {
         LoaderDialog()
@@ -102,33 +98,37 @@ fun DoctorSchedFormContent(
             .verticalScroll(rememberScrollState()),
            horizontalAlignment = Alignment.CenterHorizontally)
     {
-        BackToDoctor(Modifier.align(Alignment.Start), onBackClick = onNavigateUp)
-        TopMessageSchedule()
+        BackToAppointment(Modifier.align(Alignment.Start), onBackClick = onNavigateUp)
+        TopMessageResched()
         Column(modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp))
         {
-            DoctorSchedForm(
+            ReschedForm(
                     onNavigateToSlots =  onNavigateToSlots,
                     schedule =  schedule,
-                    doctor =  doctor,
-                    selectedDoctor =  selectedDoctor,
-                    onSelectedDoctor =  onSelectedDoctor,
+                    appointment =  appointment,
+                    selectedAppointment =  selectedAppointment,
+                    onSelectedAppointment =  onSelectedAppointment,
                     selectedDate =  selectedDate,
-                    onDateChange = onDateChange)
+                    onSelectedDate = onSelectedDate,
+                    doctor = doctor)
         }
     }
+
 }
 
+
 @Composable
-fun DoctorSchedForm(
-        onNavigateToSlots : (Int, String) -> Unit,
-        schedule : List<Schedules>,
-        doctor : Doctor,
-        selectedDoctor : Int,
-        onSelectedDoctor : (Int) -> Unit,
-        selectedDate : String,
-        onDateChange : (String) -> Unit)
+fun ReschedForm(
+        onNavigateToSlots : (Int, Int, String) -> Unit ,
+        schedule : List<Schedules> ,
+        appointment : Appointments ,
+        selectedAppointment : Int ,
+        onSelectedAppointment : (Int) -> Unit ,
+        selectedDate : String ,
+        onSelectedDate : (String) -> Unit,
+        doctor : Doctor)
 {
     val isValidate by derivedStateOf { selectedDate.isNotBlank() }
 
@@ -149,9 +149,9 @@ fun DoctorSchedForm(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = "Doctor Info",
-                     style = typography.subtitle1,
-                     fontSize = 18.sp,
+                Text(text = "Appointment Info" ,
+                     style = typography.subtitle1 ,
+                     fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
             Row(modifier = Modifier
@@ -160,9 +160,9 @@ fun DoctorSchedForm(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = "Dr. ${doctor.name.orEmpty()}",
-                     style = typography.caption,
-                     fontSize = 16.sp,
+                Text(text = "Doctor Name: Dr. ${appointment.doctor.name.orEmpty()}" ,
+                     style = typography.caption ,
+                     fontSize = 16.sp ,
                      textAlign = TextAlign.Start)
             }
             Row(modifier = Modifier
@@ -171,20 +171,31 @@ fun DoctorSchedForm(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = doctor.email ?: "No Email Provided",
-                     style = typography.caption,
-                     fontSize = 16.sp,
+                Text(text = "Date: ${appointment.scheduled_at}",
+                     style = typography.caption ,
+                     fontSize = 16.sp ,
                      textAlign = TextAlign.Start)
             }
             Row(modifier = Modifier
                     .fillMaxWidth()
-                    .padding(bottom = 4.dp),
+                    .padding(bottom = 8.dp),
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = doctor.contact_number ?: "No Number Provided",
-                     style = typography.caption,
-                     fontSize = 16.sp,
+                Text(text = "Time: ${appointment.start_time} - ${appointment.end_time}",
+                     style = typography.caption ,
+                     fontSize = 16.sp ,
+                     textAlign = TextAlign.Start)
+            }
+            Row(modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = 8.dp),
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically)
+            {
+                Text(text = "Consultation Type: ${appointment.type}",
+                     style = typography.caption ,
+                     fontSize = 16.sp ,
                      textAlign = TextAlign.Start)
             }
         }
@@ -200,34 +211,34 @@ fun DoctorSchedForm(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = "Available Dates",
-                     style = typography.subtitle1,
-                     fontSize = 18.sp,
+                Text(text = "Available Dates" ,
+                     style = typography.subtitle1 ,
+                     fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
             schedule.forEach { index ->
                 Row(modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 0.dp)
-                        .selectable(selected = (selectedDate == index.date) , onClick = { onDateChange(index.date !!) } , role = Role.Button),
-                    horizontalArrangement = Arrangement.Start,
+                        .selectable(selected = (selectedDate == index.date) , onClick = { onSelectedDate(index.date !!) } , role = Role.Button) ,
+                    horizontalArrangement = Arrangement.Start ,
                     verticalAlignment = Alignment.CenterVertically)
                 {
                     RadioButton(
                             selected =  (selectedDate == index.date),
-                            onClick = { onDateChange(index.date!!) },
+                            onClick = { onSelectedDate(index.date!!) },
                             modifier = Modifier.padding(end = 8.dp),
                             colors = RadioButtonDefaults.colors(
-                                    selectedColor = Color(0xff15C3DD),
+                                    selectedColor = Color(0xff15C3DD) ,
                                     unselectedColor = Color(0xff15C3DD).copy(alpha = 0.5f)
-                            ))
-                    Text(text = "${index.date_label.orEmpty()} (${index.slots} slots) ",
-                         style = typography.caption,
-                         fontSize = 16.sp,
+                                                               ))
+                    Text(text = "${index.date_label.orEmpty()} (${index.slots} slots) " ,
+                         style = typography.caption ,
+                         fontSize = 16.sp ,
                          textAlign = TextAlign.Start)
-                    Text(text = "${index.start_time} - ${index.end_time}",
-                         style = typography.caption,
-                         fontSize = 16.sp,
+                    Text(text = "${index.start_time} - ${index.end_time}" ,
+                         style = typography.caption ,
+                         fontSize = 16.sp ,
                          textAlign = TextAlign.Start)
                 }
             }
@@ -243,7 +254,7 @@ fun DoctorSchedForm(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center)
         {
-            Button(onClick = { onNavigateToSlots(doctor.id!!, selectedDate) } ,
+            Button(onClick = { onNavigateToSlots(appointment.id!!, appointment.doctor.id!!, selectedDate) } ,
                    enabled = isValidate ,
                    modifier = Modifier
                            .fillMaxSize()
@@ -257,8 +268,10 @@ fun DoctorSchedForm(
     }
 }
 
+
+
 @Composable
-fun BackToDoctor(modifier : Modifier , onBackClick : () -> Unit)
+fun BackToAppointment(modifier : Modifier , onBackClick : () -> Unit)
 {
     IconButton(onClick = onBackClick, modifier.padding(start = 8.dp, end = 8.dp, bottom = 4.dp, top = 20.dp))
     {
@@ -269,7 +282,7 @@ fun BackToDoctor(modifier : Modifier , onBackClick : () -> Unit)
 }
 
 @Composable
-fun TopMessageSchedule()
+fun TopMessageResched()
 {
     Column(modifier = Modifier
             .fillMaxWidth()
@@ -277,7 +290,7 @@ fun TopMessageSchedule()
            horizontalAlignment = Alignment.CenterHorizontally ,
            verticalArrangement = Arrangement.Center)
     {
-        Text(text = "Select a Date" ,
+        Text(text = "Select a New Date" ,
              style = MaterialTheme.typography.h5 ,
              fontSize = 25.sp ,
              textAlign = TextAlign.Center)

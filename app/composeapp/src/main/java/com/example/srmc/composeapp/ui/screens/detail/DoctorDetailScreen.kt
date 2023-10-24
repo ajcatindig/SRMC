@@ -90,7 +90,7 @@ fun DoctorContent(
                             .fillMaxSize()
                             .background(MaterialTheme.colors.surface))
                     {
-                        LazyColumn(modifier = Modifier.fillMaxSize())
+                        LazyColumn(modifier = Modifier.fillMaxSize().padding(horizontal = 16.dp))
                         {
                             item {
                                 Column(horizontalAlignment = Alignment.CenterHorizontally,

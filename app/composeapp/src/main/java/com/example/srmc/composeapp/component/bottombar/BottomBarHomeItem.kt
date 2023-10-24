@@ -25,10 +25,6 @@ sealed class BottomBarHomeItem(
             title = "Appointments",
             icon = Icons.Filled.PermContactCalendar)
 
-    object Transactions : BottomBarHomeItem(
-            route = "TRANSACTIONS",
-            title = "Transactions",
-            icon = Icons.Filled.Payment)
 
     object Profile : BottomBarHomeItem(
             route = "PROFILE",

@@ -1,6 +1,7 @@
 package com.example.srmc.data.remote.api
 
 import com.example.srmc.data.remote.model.response.DoctorResponse
+import com.example.srmc.data.remote.model.response.DoctorSchedule
 import com.example.srmc.data.remote.model.response.DoctorSchedules
 import com.example.srmc.data.remote.model.response.DoctorSlots
 import com.example.srmc.data.remote.model.response.DoctorsResponse
@@ -22,6 +23,10 @@ interface DoctorService
     @Headers("Accept: application/json" , "X-Requested-With: XMLHttpRequest")
     @GET("api/users/doctor/{id}/dates")
     suspend fun getDoctorSchedules(@Path("id") id : Int) : Response<DoctorSchedules>
+
+    @Headers("Accept: application/json" , "X-Requested-With: XMLHttpRequest")
+    @GET("api/users/doctor/{id}/{date}")
+    suspend fun getDoctorSchedule(@Path("id") id : Int, @Path("date") date : String) : Response<DoctorSchedule>
 
     @Headers("Accept: application/json", "X-Requested-With: XMLHttpRequest")
     @GET("api/users/doctor/{id}/{date}/times")

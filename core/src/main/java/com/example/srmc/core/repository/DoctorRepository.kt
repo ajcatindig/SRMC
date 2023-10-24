@@ -28,6 +28,11 @@ interface DoctorRepository
     fun getDoctorSchedules(id : Int) : Flow<Either<List<Schedules>>>
 
     /**
+     * Return specified doctor schedule
+     */
+    fun getDoctorScheduleByDate(id : Int, date : String) : Flow<Schedules>
+
+    /**
      * Returns all schedule slots
      */
     fun getDoctorSlots(id : Int, date : String) : Flow<Either<List<Slots>>>

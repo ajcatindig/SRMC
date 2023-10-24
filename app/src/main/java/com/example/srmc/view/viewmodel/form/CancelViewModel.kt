@@ -4,43 +4,27 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.srmc.core.repository.AppointmentRepository
 import com.example.srmc.di.RemoteRepository
-import com.example.srmc.view.state.form.AppointmentFormState
+import com.example.srmc.view.state.form.CancelState
 import com.example.srmc.view.viewmodel.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AppointmentFormViewModel @Inject constructor(
+class CancelViewModel @Inject constructor(
         @RemoteRepository val appointmentRepository : AppointmentRepository
-) : BaseViewModel<AppointmentFormState>(initialState = AppointmentFormState())
+) : BaseViewModel<CancelState>(initialState = CancelState())
 {
-    fun setDoctorId(id : Int) {
-        setState { state -> state.copy(doctor_id = id) }
+    fun setId(id : Int) {
+        setState { state -> state.copy(id = id) }
     }
 
-    fun setType(type : String) {
-        setState { state -> state.copy(type = type) }
-    }
-
-    fun setDate(date : String) {
-        setState { state -> state.copy(date = date) }
-    }
-
-    fun setTime(time : String) {
-        setState { state -> state.copy(time = time) }
-    }
-
-    fun postAppointment(id : Int, date : String) {
+    fun cancelAppointment(id : Int)
+    {
         viewModelScope.launch {
-            val type = currentState.type
-            val doctor_id = currentState.doctor_id
-            val sched = currentState.date
-            val time = currentState.time
+            val appointment_id = currentState.id
 
-            setState { state -> state.copy(isLoading = true) }
-
-            val response = appointmentRepository.postAppointment(type, id, date, time)
+            val response = appointmentRepository.cancelAppointment(id)
 
             response.onSuccess { message ->
                 setState { state ->
@@ -48,21 +32,21 @@ class AppointmentFormViewModel @Inject constructor(
                                isSuccess = message.message,
                                error = null)
                 }
-                Log.d("AppointFormViewModel", "$message")
+                Log.d("CancelViewModel", "$message")
             }.onUnprocessable { message ->
                 setState { state ->
                     state.copy(isLoading = false,
                                isSuccess = null,
                                error = message)
                 }
-                Log.e("AppointFormViewModel", "$message")
+                Log.e("CancelViewModel", "$message")
             }.onError { message ->
                 setState { state ->
                     state.copy(isLoading = false,
                                isSuccess = null,
                                error = "Something went wrong")
                 }
-                Log.e("AppointFormViewModel", "$message")
+                Log.e("CancelViewModel", "$message")
             }
         }
     }

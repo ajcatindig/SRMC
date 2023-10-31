@@ -186,7 +186,7 @@ fun AppointmentContent(
                                             {
                                                 Text(text = "Dr. ${data.doctor.name}",
                                                      style = typography.h5,
-                                                     fontSize = 22.sp)
+                                                     fontSize = 18.sp)
                                             }
                                         }
                                     }
@@ -207,7 +207,7 @@ fun AppointmentContent(
                                                 {
                                                     Text(text = "Appointment & Payment Status",
                                                          style = typography.h5,
-                                                         fontSize = 20.sp)
+                                                         fontSize = 18.sp)
                                                 }
                                                 Row(modifier = Modifier
                                                         .fillMaxWidth()
@@ -249,7 +249,7 @@ fun AppointmentContent(
                                                 {
                                                     Text(text = "Doctor's Contact Information",
                                                          style = typography.h5,
-                                                         fontSize = 20.sp)
+                                                         fontSize = 18.sp)
                                                 }
                                                 Row(modifier = Modifier
                                                         .fillMaxWidth()
@@ -257,7 +257,7 @@ fun AppointmentContent(
                                                     horizontalArrangement = Arrangement.Start,
                                                     verticalAlignment = Alignment.CenterVertically)
                                                 {
-                                                    Text(text = "Email: ${data.doctor.email}",
+                                                    Text(text = "${data.doctor.email}",
                                                          style = typography.caption,
                                                          fontSize = 16.sp)
                                                 }
@@ -267,7 +267,7 @@ fun AppointmentContent(
                                                     horizontalArrangement = Arrangement.Start,
                                                     verticalAlignment = Alignment.CenterVertically)
                                                 {
-                                                    Text(text = "Phone: ${data.doctor.contact_number}",
+                                                    Text(text = "${data.doctor.contact_number}",
                                                          style = typography.caption,
                                                          fontSize = 16.sp)
                                                 }
@@ -286,7 +286,7 @@ fun AppointmentContent(
                                                 {
                                                     Text(text = "Appointment Details",
                                                          style = typography.h5,
-                                                         fontSize = 20.sp)
+                                                         fontSize = 18.sp)
                                                 }
                                                 Row(modifier = Modifier
                                                         .fillMaxWidth()
@@ -315,8 +315,7 @@ fun AppointmentContent(
                                                          fontSize = 16.sp)
                                                 }
                                                 Row(modifier = Modifier
-                                                        .fillMaxWidth()
-                                                        .padding(bottom = 8.dp),
+                                                        .fillMaxWidth(),
                                                     horizontalArrangement = Arrangement.Start,
                                                     verticalAlignment = Alignment.CenterVertically)
                                                 {
@@ -332,7 +331,7 @@ fun AppointmentContent(
                             item {
                                 Column(modifier = Modifier
                                         .fillMaxSize()
-                                        .padding(horizontal = 16.dp),
+                                        .padding(start = 16.dp, end = 16.dp, bottom = 40.dp),
                                        verticalArrangement = Arrangement.Bottom,
                                        horizontalAlignment = Alignment.CenterHorizontally)
                                 {
@@ -346,12 +345,12 @@ fun AppointmentContent(
                                             Button(
                                                 onClick = { onNavigateToForm(data.id!!, data.doctor.id!!) } ,
                                                 modifier = Modifier
-                                                        .height(55.dp) ,
+                                                        .height(45.dp) ,
                                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
                                                 shape = RoundedCornerShape(25.dp),
                                                 enabled = reschedEnabled)
                                             {
-                                                Text(text = "Reschedule" , color = Color.White , style = typography.h6)
+                                                Text(text = "Reschedule" , color = Color.White , style = typography.h6, fontSize = 18.sp, textAlign = TextAlign.Center)
                                             }
                                         }
                                         Row(horizontalArrangement = Arrangement.Center,
@@ -360,12 +359,12 @@ fun AppointmentContent(
                                             Button(
                                                     onClick = { IntentUtils.launchBrowser(context, paymentUrl) } ,
                                                     modifier = Modifier
-                                                            .height(55.dp) ,
+                                                            .height(45.dp) ,
                                                     colors = ButtonDefaults.buttonColors(backgroundColor = buttonGreen) ,
                                                     shape = RoundedCornerShape(25.dp),
                                                     enabled = paymentEnabled)
                                             {
-                                                Text(text = "Pay Now" , color = Color.White , style = typography.h6)
+                                                Text(text = "Pay" , color = Color.White , style = typography.h6, fontSize = 18.sp, textAlign = TextAlign.Center)
                                             }
                                         }
                                         Row(horizontalArrangement = Arrangement.End,
@@ -374,12 +373,12 @@ fun AppointmentContent(
                                             Button(
                                                     onClick = { onCancelClick() } ,
                                                     modifier = Modifier
-                                                            .height(55.dp) ,
+                                                            .height(45.dp) ,
                                                     colors = ButtonDefaults.buttonColors(backgroundColor = buttonRed) ,
                                                     shape = RoundedCornerShape(25.dp),
                                                     enabled = cancelEnabled)
                                             {
-                                                Text(text = "Cancel" , color = Color.White , style = typography.h6)
+                                                Text(text = "Cancel" , color = Color.White , style = typography.h6, fontSize = 18.sp, textAlign = TextAlign.Center)
                                             }
                                         }
                                     }

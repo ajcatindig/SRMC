@@ -164,7 +164,7 @@ fun ReschedSlotsForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Appointment Info" ,
-                     style = typography.subtitle1 ,
+                     style = typography.h5 ,
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
@@ -184,7 +184,7 @@ fun ReschedSlotsForm(
                 horizontalArrangement = Arrangement.Start ,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = "New Date Selected: ${schedule.date_label} (${schedule.date})" ,
+                Text(text = "New Date: ${schedule.date_label} (${schedule.date})" ,
                      style = typography.caption ,
                      fontSize = 16.sp , textAlign = TextAlign.Start)
             }
@@ -212,7 +212,7 @@ fun ReschedSlotsForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Available Slots" ,
-                     style = typography.subtitle1 ,
+                     style = typography.h5 ,
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }

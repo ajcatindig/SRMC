@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity()
     {
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
-        window.setFlags(WindowManager.LayoutParams.FLAG_SECURE , WindowManager.LayoutParams.FLAG_SECURE)
         setContent {
             SRMCMain()
         }

@@ -68,7 +68,7 @@ fun DoctorCard(
             GlideImage(
                     imageModel =  imageUrl  ,
                     modifier = Modifier
-                            .size(120.dp)
+                            .size(100.dp)
                             .clip(CircleShape) ,
                     loading = {
                         Box(modifier = Modifier.matchParentSize()) {
@@ -135,10 +135,10 @@ fun DoctorCard(
                         colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
                         shape = RoundedCornerShape(25.dp))
                 {
-                    Text(text = "VIEW DOCTOR" ,
+                    Text(text = "VIEW" ,
                          color = Color.White ,
                          style = typography.h6,
-                         fontSize = 16.sp)
+                         fontSize = 14.sp)
                 }
             }
         }

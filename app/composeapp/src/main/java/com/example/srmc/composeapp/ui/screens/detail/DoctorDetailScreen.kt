@@ -143,7 +143,7 @@ fun DoctorContent(
                                             {
                                                 Text(text = "Dr. ${data.name.orEmpty()}",
                                                      style = typography.h5,
-                                                     fontSize = 22.sp)
+                                                     fontSize = 18.sp)
                                             }
                                             Row(verticalAlignment = Alignment.CenterVertically,
                                                 horizontalArrangement = Arrangement.Center,
@@ -151,7 +151,7 @@ fun DoctorContent(
                                             {
                                                 Text(text = data.title ?: "General Medicine",
                                                      style = typography.subtitle1,
-                                                     fontSize = 18.sp)
+                                                     fontSize = 16.sp)
                                             }
                                         }
                                     }
@@ -172,7 +172,7 @@ fun DoctorContent(
                                                 {
                                                     Text(text = "Contact Information",
                                                          style = typography.h5,
-                                                         fontSize = 20.sp)
+                                                         fontSize = 18.sp)
                                                 }
                                                 Row(modifier = Modifier
                                                         .fillMaxWidth()
@@ -180,8 +180,8 @@ fun DoctorContent(
                                                     horizontalArrangement = Arrangement.Start,
                                                     verticalAlignment = Alignment.CenterVertically)
                                                 {
-                                                    Text(text = "Email: ${data.email.orEmpty()}",
-                                                         style = typography.caption,
+                                                    Text(text = data.email.orEmpty() ,
+                                                         style = typography.caption ,
                                                          fontSize = 16.sp)
                                                 }
                                                 Row(modifier = Modifier
@@ -189,8 +189,8 @@ fun DoctorContent(
                                                     horizontalArrangement = Arrangement.Start,
                                                     verticalAlignment = Alignment.CenterVertically)
                                                 {
-                                                    Text(text = "Phone: ${data.contact_number.orEmpty()}",
-                                                         style = typography.caption,
+                                                    Text(text = data.contact_number.orEmpty() ,
+                                                         style = typography.caption ,
                                                          fontSize = 16.sp)
                                                 }
                                             }
@@ -208,7 +208,7 @@ fun DoctorContent(
                                                {
                                                    Text(text = "Availability",
                                                         style = typography.h5,
-                                                        fontSize = 20.sp)
+                                                        fontSize = 18.sp)
                                                }
                                                Row(modifier = Modifier
                                                        .fillMaxWidth()

@@ -150,7 +150,7 @@ fun DoctorSchedForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Doctor Info",
-                     style = typography.subtitle1,
+                     style = typography.h5,
                      fontSize = 18.sp,
                      textAlign = TextAlign.Start)
             }
@@ -201,7 +201,7 @@ fun DoctorSchedForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Available Dates",
-                     style = typography.subtitle1,
+                     style = typography.h5,
                      fontSize = 18.sp,
                      textAlign = TextAlign.Start)
             }
@@ -222,10 +222,6 @@ fun DoctorSchedForm(
                                     unselectedColor = Color(0xff15C3DD).copy(alpha = 0.5f)
                             ))
                     Text(text = "${index.date_label.orEmpty()} (${index.slots} slots) ",
-                         style = typography.caption,
-                         fontSize = 16.sp,
-                         textAlign = TextAlign.Start)
-                    Text(text = "${index.start_time} - ${index.end_time}",
                          style = typography.caption,
                          fontSize = 16.sp,
                          textAlign = TextAlign.Start)

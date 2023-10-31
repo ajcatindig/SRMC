@@ -179,7 +179,7 @@ fun DoctorSlotsForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Doctor Info" ,
-                     style = typography.subtitle1 ,
+                     style = typography.h5 ,
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
@@ -189,7 +189,7 @@ fun DoctorSlotsForm(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = "Doctor: Dr. ${doctor.name.orEmpty()}" ,
+                Text(text = "Dr. ${doctor.name.orEmpty()}" ,
                      style = typography.caption ,
                      fontSize = 16.sp ,
                      textAlign = TextAlign.Start)
@@ -230,7 +230,7 @@ fun DoctorSlotsForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Selected Schedule" ,
-                     style = typography.subtitle1 ,
+                     style = typography.h5 ,
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
@@ -259,7 +259,7 @@ fun DoctorSlotsForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Select Consultation Type" ,
-                     style = typography.subtitle1 ,
+                     style = typography.h5 ,
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
@@ -299,7 +299,7 @@ fun DoctorSlotsForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Available Slots" ,
-                     style = typography.subtitle1 ,
+                     style = typography.h5 ,
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }

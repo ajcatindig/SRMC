@@ -150,7 +150,7 @@ fun ReschedForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Appointment Info" ,
-                     style = typography.subtitle1 ,
+                     style = typography.h5 ,
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
@@ -160,7 +160,7 @@ fun ReschedForm(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = "Doctor Name: Dr. ${appointment.doctor.name.orEmpty()}" ,
+                Text(text = "Dr. ${appointment.doctor.name.orEmpty()}" ,
                      style = typography.caption ,
                      fontSize = 16.sp ,
                      textAlign = TextAlign.Start)
@@ -212,7 +212,7 @@ fun ReschedForm(
                 verticalAlignment = Alignment.CenterVertically)
             {
                 Text(text = "Available Dates" ,
-                     style = typography.subtitle1 ,
+                     style = typography.h5 ,
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
@@ -233,10 +233,6 @@ fun ReschedForm(
                                     unselectedColor = Color(0xff15C3DD).copy(alpha = 0.5f)
                                                                ))
                     Text(text = "${index.date_label.orEmpty()} (${index.slots} slots) " ,
-                         style = typography.caption ,
-                         fontSize = 16.sp ,
-                         textAlign = TextAlign.Start)
-                    Text(text = "${index.start_time} - ${index.end_time}" ,
                          style = typography.caption ,
                          fontSize = 16.sp ,
                          textAlign = TextAlign.Start)

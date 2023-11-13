@@ -62,6 +62,8 @@ import com.example.srmc.view.viewmodel.form.CancelViewModel
 import com.google.accompanist.swiperefresh.SwipeRefresh
 import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import com.skydoves.landscapist.glide.GlideImage
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun AppointmentDetailScreen(
@@ -107,9 +109,24 @@ fun AppointmentContent(
 {
     val context = LocalContext.current
     val paymentUrl = data.payment_link.orEmpty()
-    val paymentEnabled by derivedStateOf { data.verified_at == null && data.payment_link != null && data.cancelled_at == null }
-    val reschedEnabled by derivedStateOf { data.accepted_at != null && data.cancelled_at == null }
+    val paymentEnabled by derivedStateOf { data.verified_at == null && data.payment_link != null && data.cancelled_at == null && data.accepted_at != null }
+    val reschedEnabled by derivedStateOf { data.cancelled_at == null }
     val cancelEnabled by derivedStateOf { data.accepted_at != null && data.check_out == null && data.cancelled_at == null }
+
+    val timeFormatter24 = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+
+// Parse the time strings from the API
+    val startTime = if (!data.start_time.isNullOrEmpty()) timeFormatter24.parse(data.start_time) else null
+    val endTime = if (!data.end_time.isNullOrEmpty()) timeFormatter24.parse(data.end_time) else null
+    val followUpStartTime = data.follow_up_start_time?.let { if (!it.isNullOrEmpty()) timeFormatter24.parse(it) else null }
+    val followUpEndTime = data.follow_up_end_time?.let { if (!it.isNullOrEmpty()) timeFormatter24.parse(it) else null }
+
+// Check if parsing was successful before formatting
+    val timeFormatter12 = SimpleDateFormat("h:mm a", Locale.getDefault())
+    val start = startTime?.let { timeFormatter12.format(it) }
+    val end = endTime?.let { timeFormatter12.format(it) }
+    val follow_start = followUpStartTime?.let { timeFormatter12.format(it) }
+    val follow_end = followUpEndTime?.let { timeFormatter12.format(it) }
 
     SRMCScaffold(
         error = error,
@@ -307,9 +324,9 @@ fun AppointmentContent(
                                                     verticalAlignment = Alignment.CenterVertically)
                                                 {
                                                     Text(text = if (data.follow_up_start_time != null && data.follow_up_end_time != null) {
-                                                        "Time: ${data.follow_up_start_time} - ${data.follow_up_end_time}"
+                                                        "Time: $follow_start - $follow_end"
                                                     } else {
-                                                        "Time: ${data.start_time} - ${data.end_time}"
+                                                        "Time: $start - $end"
                                                     },
                                                          style = typography.caption,
                                                          fontSize = 16.sp)

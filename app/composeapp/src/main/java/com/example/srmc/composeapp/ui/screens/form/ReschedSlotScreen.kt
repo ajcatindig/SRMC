@@ -41,6 +41,8 @@ import com.example.srmc.view.viewmodel.detail.AppointmentDetailViewModel
 import com.example.srmc.view.viewmodel.detail.ScheduleDetailViewModel
 import com.example.srmc.view.viewmodel.form.ReschedViewModel
 import com.example.srmc.view.viewmodel.form.SlotsViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun ReschedSlotScreen(
@@ -217,6 +219,17 @@ fun ReschedSlotsForm(
                      textAlign = TextAlign.Start)
             }
             slots.forEach { index ->
+                val timeFormatter24 = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+
+// Parse the time strings from the API
+                val startTime = if (!index.start_time.isNullOrEmpty()) timeFormatter24.parse(index.start_time) else null
+                val endTime = if (!index.end_time.isNullOrEmpty()) timeFormatter24.parse(index.end_time) else null
+
+// Check if parsing was successful before formatting
+                val timeFormatter12 = SimpleDateFormat("h:mm a", Locale.getDefault())
+                val start = startTime?.let { timeFormatter12.format(it) }
+                val end = endTime?.let { timeFormatter12.format(it) }
+
                 Row(modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 0.dp)
@@ -233,7 +246,7 @@ fun ReschedSlotsForm(
                             colors = RadioButtonDefaults.colors(
                                     selectedColor = Color(0xff15C3DD) ,
                                     unselectedColor = Color(0xff15C3DD).copy(alpha = 0.5f)))
-                    Text(text = "${index.start_time.orEmpty()} - ${index.end_time.orEmpty()}" ,
+                    Text(text = "$start - $end" ,
                          style = typography.caption ,
                          fontSize = 16.sp ,
                          textAlign = TextAlign.Start)

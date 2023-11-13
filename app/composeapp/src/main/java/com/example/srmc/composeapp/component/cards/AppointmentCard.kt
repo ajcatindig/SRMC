@@ -1,5 +1,7 @@
 package com.example.srmc.composeapp.component.cards
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,6 +35,9 @@ import com.example.srmc.composeapp.ui.theme.lightBlue
 import com.example.srmc.composeapp.ui.theme.surfaceNight
 import com.example.srmc.composeapp.ui.theme.typography
 import java.text.SimpleDateFormat
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 
 @Composable
 fun AppointmentCard(
@@ -54,6 +59,20 @@ fun AppointmentCard(
         created_at : String,
         onAppointmentClick : () -> Unit)
 {
+    val timeFormatter24 = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+
+// Parse the time strings from the API
+    val startTime = if (!start_time.isNullOrEmpty()) timeFormatter24.parse(start_time) else null
+    val endTime = if (!end_time.isNullOrEmpty()) timeFormatter24.parse(end_time) else null
+    val followUpStartTime = follow_up_start_time?.let { if (!it.isNullOrEmpty()) timeFormatter24.parse(it) else null }
+    val followUpEndTime = follow_up_end_time?.let { if (!it.isNullOrEmpty()) timeFormatter24.parse(it) else null }
+
+// Check if parsing was successful before formatting
+    val timeFormatter12 = SimpleDateFormat("h:mm a", Locale.getDefault())
+    val start = startTime?.let { timeFormatter12.format(it) }
+    val end = endTime?.let { timeFormatter12.format(it) }
+    val follow_start = followUpStartTime?.let { timeFormatter12.format(it) }
+    val follow_end = followUpEndTime?.let { timeFormatter12.format(it) }
     val context = LocalContext.current
 
     Card(
@@ -153,9 +172,9 @@ fun AppointmentCard(
                     horizontalArrangement = Arrangement.Start)
                 {
                     Text(text = if (follow_up_start_time?.isNotEmpty()!! && follow_up_end_time?.isNotEmpty()!!) {
-                            "Time: $follow_up_start_time - $follow_up_end_time"
+                            "Time: $follow_start - $follow_end"
                     } else {
-                           "Time: $start_time - $end_time"
+                           "Time: $start - $end"
                     },
                          style = typography.subtitle1 ,
                          textAlign = TextAlign.Start ,

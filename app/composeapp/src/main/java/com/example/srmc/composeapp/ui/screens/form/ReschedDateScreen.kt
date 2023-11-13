@@ -43,6 +43,8 @@ import com.example.srmc.view.viewmodel.detail.AppointmentDetailViewModel
 import com.example.srmc.view.viewmodel.detail.DoctorDetailViewModel
 import com.example.srmc.view.viewmodel.form.ReschedViewModel
 import com.example.srmc.view.viewmodel.form.SchedulesViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun ReschedDateScreen(
@@ -130,6 +132,21 @@ fun ReschedForm(
         onSelectedDate : (String) -> Unit,
         doctor : Doctor)
 {
+    val timeFormatter24 = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+
+// Parse the time strings from the API
+    val startTime = if (!appointment.start_time.isNullOrEmpty()) timeFormatter24.parse(appointment.start_time) else null
+    val endTime = if (!appointment.end_time.isNullOrEmpty()) timeFormatter24.parse(appointment.end_time) else null
+    val followUpStartTime = appointment.follow_up_start_time?.let { if (!it.isNullOrEmpty()) timeFormatter24.parse(it) else null }
+    val followUpEndTime = appointment.follow_up_end_time?.let { if (!it.isNullOrEmpty()) timeFormatter24.parse(it) else null }
+
+// Check if parsing was successful before formatting
+    val timeFormatter12 = SimpleDateFormat("h:mm a", Locale.getDefault())
+    val start = startTime?.let { timeFormatter12.format(it) }
+    val end = endTime?.let { timeFormatter12.format(it) }
+    val follow_start = followUpStartTime?.let { timeFormatter12.format(it) }
+    val follow_end = followUpEndTime?.let { timeFormatter12.format(it) }
+
     val isValidate by derivedStateOf { selectedDate.isNotBlank() }
 
     Column(modifier = Modifier
@@ -182,7 +199,8 @@ fun ReschedForm(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = "Time: ${appointment.start_time} - ${appointment.end_time}",
+                Text(text = if (appointment.follow_up_start_time != null && appointment.end_time != null) "Time: $follow_start - $follow_end"
+                     else "Time: $start - $end",
                      style = typography.caption ,
                      fontSize = 16.sp ,
                      textAlign = TextAlign.Start)

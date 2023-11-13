@@ -37,6 +37,7 @@ import com.example.srmc.composeapp.component.dialog.LoaderDialog
 import com.example.srmc.composeapp.component.dialog.SuccessDialog
 import com.example.srmc.composeapp.ui.theme.typography
 import com.example.srmc.composeapp.utils.collectState
+import com.example.srmc.core.model.ConsultationType
 import com.example.srmc.core.model.Doctor
 import com.example.srmc.core.model.Schedules
 import com.example.srmc.core.model.Slots
@@ -45,6 +46,8 @@ import com.example.srmc.view.viewmodel.detail.ScheduleDetailViewModel
 import com.example.srmc.view.viewmodel.form.AppointmentFormViewModel
 import com.example.srmc.view.viewmodel.form.SchedulesViewModel
 import com.example.srmc.view.viewmodel.form.SlotsViewModel
+import java.text.SimpleDateFormat
+import java.util.Locale
 
 @Composable
 fun DoctorSlotsScreen(
@@ -59,7 +62,10 @@ fun DoctorSlotsScreen(
     val state3 by viewModel3.collectState()
     val state4 by viewModel4.collectState()
 
-    val type = listOf("In Person", "Teleconsultation")
+    val types = listOf(
+            ConsultationType(id = 1, displayName = "In Person") ,
+            ConsultationType(id = 2, displayName = "Teleconsultation")
+                      )
 
     DoctorSlotsContent(
             isLoading =  state4.isLoading,
@@ -76,7 +82,7 @@ fun DoctorSlotsScreen(
             schedule = state2.data,
             selectedSched = state4.date,
             onSelectedSched = viewModel4::setDate,
-            type = type,
+            type = types,
             selectedType = state4.type,
             onSelectedType = viewModel4::setType)
 }
@@ -97,9 +103,9 @@ fun DoctorSlotsContent(
         schedule : Schedules ,
         selectedSched : String ,
         onSelectedSched : (String) -> Unit ,
-        type : List<String> ,
-        selectedType : String ,
-        onSelectedType : (String) -> Unit)
+        type : List<ConsultationType> ,
+        selectedType : Int ,
+        onSelectedType : (Int) -> Unit)
 {
     if (isLoading) {
         LoaderDialog()
@@ -154,12 +160,14 @@ fun DoctorSlotsForm(
         schedule : Schedules,
         selectedSched : String,
         onSelectedSched : (String) -> Unit,
-        type : List<String>,
-        selectedType : String,
-        onSelectedType : (String) -> Unit)
+        type : List<ConsultationType>,
+        selectedType : Int,
+        onSelectedType : (Int) -> Unit)
 {
 
-    val isValidate by derivedStateOf { selectedSlot.isNotEmpty() && selectedType.isNotEmpty() }
+
+
+    val isValidate by derivedStateOf { selectedSlot.isNotEmpty() && selectedType != 0 }
 
     Column(modifier = Modifier
             .fillMaxSize(),
@@ -263,23 +271,23 @@ fun DoctorSlotsForm(
                      fontSize = 18.sp ,
                      textAlign = TextAlign.Start)
             }
-            type.forEach { index ->
+            type.forEach { consultType ->
                 Row(modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 0.dp)
-                        .selectable(selected = (selectedType == index) , onClick = { onSelectedType(index) } , role = Role.Button) ,
+                        .selectable(selected = (selectedType == consultType.id) , onClick = { onSelectedType(consultType.id) } , role = Role.Button) ,
                     horizontalArrangement = Arrangement.Start ,
                     verticalAlignment = Alignment.CenterVertically)
                 {
                     RadioButton(
-                            selected =  (selectedType == index),
-                            onClick = { onSelectedType(index) },
+                            selected =  (selectedType == consultType.id),
+                            onClick = { onSelectedType(consultType.id) },
                             modifier = Modifier.padding(end = 8.dp),
                             colors = RadioButtonDefaults.colors(
                                     selectedColor = Color(0xff15C3DD) ,
                                     unselectedColor = Color(0xff15C3DD).copy(alpha = 0.5f)
                                                                ))
-                    Text(text = index ,
+                    Text(text = consultType.displayName ,
                          style = typography.caption ,
                          fontSize = 16.sp ,
                          textAlign = TextAlign.Start)
@@ -304,6 +312,18 @@ fun DoctorSlotsForm(
                      textAlign = TextAlign.Start)
             }
             slots.forEach { index ->
+                val timeFormatter24 = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+
+// Parse the time strings from the API
+                val startTime = if (!index.start_time.isNullOrEmpty()) timeFormatter24.parse(index.start_time) else null
+                val endTime = if (!index.end_time.isNullOrEmpty()) timeFormatter24.parse(index.end_time) else null
+
+// Check if parsing was successful before formatting
+                val timeFormatter12 = SimpleDateFormat("h:mm a", Locale.getDefault())
+                val start = startTime?.let { timeFormatter12.format(it) }
+                val end = endTime?.let { timeFormatter12.format(it) }
+
+
                 Row(modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 0.dp)
@@ -321,7 +341,7 @@ fun DoctorSlotsForm(
                                     selectedColor = Color(0xff15C3DD) ,
                                     unselectedColor = Color(0xff15C3DD).copy(alpha = 0.5f)
                                                                ))
-                    Text(text = "${index.start_time.orEmpty()} - ${index.end_time.orEmpty()}" ,
+                    Text(text = "$start - $end" ,
                          style = typography.caption ,
                          fontSize = 16.sp ,
                          textAlign = TextAlign.Start)

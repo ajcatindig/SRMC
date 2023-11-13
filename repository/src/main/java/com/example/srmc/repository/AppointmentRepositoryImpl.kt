@@ -21,7 +21,7 @@ class AppointmentRepositoryImpl @Inject internal constructor(
 ) : AppointmentRepository
 {
     override suspend fun postAppointment(
-            type : String,
+            type : Int,
             doctor_id : Int ,
             date : String ,
             time : String) : Either<AppointmentResult>

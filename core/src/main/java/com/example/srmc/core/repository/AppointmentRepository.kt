@@ -9,7 +9,7 @@ import javax.inject.Singleton
 interface AppointmentRepository
 {
     suspend fun postAppointment(
-            type : String,
+            type : Int,
             doctor_id : Int,
             date : String,
             time : String

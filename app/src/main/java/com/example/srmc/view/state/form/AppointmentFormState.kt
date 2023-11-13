@@ -6,7 +6,7 @@ data class AppointmentFormState(
         val isLoading : Boolean = false,
         val isSuccess : String? = null,
         val error :  String? = null,
-        val type : String = "",
+        val type : Int = 0,
         val doctor_id : Int = 0,
         val date : String = "",
         val time : String = ""

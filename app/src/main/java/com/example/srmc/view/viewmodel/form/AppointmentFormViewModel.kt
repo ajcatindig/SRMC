@@ -19,7 +19,7 @@ class AppointmentFormViewModel @Inject constructor(
         setState { state -> state.copy(doctor_id = id) }
     }
 
-    fun setType(type : String) {
+    fun setType(type : Int) {
         setState { state -> state.copy(type = type) }
     }
 

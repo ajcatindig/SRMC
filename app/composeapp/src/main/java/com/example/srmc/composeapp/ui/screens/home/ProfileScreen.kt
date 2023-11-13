@@ -80,8 +80,8 @@ fun ProfileContent(
         onLogoutClick : () -> Unit)
 {
     val context = LocalContext.current
-    val changePassLink = "https://srmc-front.mcroad.com/change-password"
-    val manageProfileLink = "https://srmc-front.mcroad.com/edit-profile"
+    val changePassLink = "https://srmc-front.mcbroad.com/profile"
+    val manageProfileLink = "https://srmc-front.mcbroad.com/profile"
 
 
     SRMCScaffold(

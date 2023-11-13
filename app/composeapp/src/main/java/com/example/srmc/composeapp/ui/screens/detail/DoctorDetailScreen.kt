@@ -69,6 +69,8 @@ fun DoctorContent(
         onRefresh : () -> Unit,
         onNavigateToForm : (Int) -> Unit)
 {
+    val baseLink = "https://srmc.mcbroad.com/storage/"
+
     SRMCScaffold(
         error = error,
         topAppBar = {
@@ -109,7 +111,7 @@ fun DoctorContent(
                                                 horizontalArrangement = Arrangement.Center)
                                             {
                                                 GlideImage(
-                                                    imageModel = data.profile_photo_path ,
+                                                    imageModel = baseLink + data.profile_photo_path ,
                                                     modifier = Modifier
                                                             .size(150.dp)
                                                             .clip(CircleShape) ,

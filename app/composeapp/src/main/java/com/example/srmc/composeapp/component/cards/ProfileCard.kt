@@ -51,6 +51,8 @@ fun ProfileCard(
         onChangePasswordClick : () -> Unit,
         onManageProfileClick : () -> Unit)
 {
+    val baseLink = "https://srmc.mcbroad.com/storage/"
+
     Column(modifier = Modifier.verticalScroll(rememberScrollState()))
     {
         Card(
@@ -78,7 +80,7 @@ fun ProfileCard(
                                     .padding(16.dp))
                         {
                             GlideImage(
-                                    imageModel = data.profile_photo_path ,
+                                    imageModel = baseLink + data.profile_photo_path ,
                                     modifier = Modifier.size(140.dp).clip(CircleShape) ,
                                     loading = {
                                         Box(modifier = Modifier.matchParentSize())

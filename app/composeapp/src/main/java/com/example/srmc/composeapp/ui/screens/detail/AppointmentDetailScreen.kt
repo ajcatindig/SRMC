@@ -128,6 +128,9 @@ fun AppointmentContent(
     val follow_start = followUpStartTime?.let { timeFormatter12.format(it) }
     val follow_end = followUpEndTime?.let { timeFormatter12.format(it) }
 
+
+    val baseLink = "https://srmc.mcbroad.com/storage/"
+
     SRMCScaffold(
         error = error,
         topAppBar = {
@@ -170,7 +173,7 @@ fun AppointmentContent(
                                                 horizontalArrangement = Arrangement.Center)
                                             {
                                                 GlideImage(
-                                                    imageModel = data.doctor.profile_photo_path,
+                                                    imageModel = baseLink + data.doctor.profile_photo_path,
                                                     modifier = Modifier
                                                             .size(150.dp)
                                                             .clip(CircleShape),

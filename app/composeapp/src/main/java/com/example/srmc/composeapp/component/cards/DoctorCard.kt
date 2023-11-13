@@ -47,7 +47,7 @@ fun DoctorCard(
         doctorTitle : String?,
         onDoctorClick : () -> Unit)
 {
-
+    val baseLink = "https://srmc.mcbroad.com/storage/"
     Card(
             shape = RoundedCornerShape(10.dp),
             backgroundColor = MaterialTheme.colors.surface,
@@ -66,7 +66,7 @@ fun DoctorCard(
               )
         {
             GlideImage(
-                    imageModel =  imageUrl  ,
+                    imageModel =  baseLink + imageUrl  ,
                     modifier = Modifier
                             .size(100.dp)
                             .clip(CircleShape) ,

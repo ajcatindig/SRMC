@@ -365,7 +365,7 @@ fun AppointmentContent(
                                             Button(
                                                 onClick = { onNavigateToForm(data.id!!, data.doctor.id!!) } ,
                                                 modifier = Modifier
-                                                        .height(40.dp) ,
+                                                        .height(45.dp) ,
                                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
                                                 shape = RoundedCornerShape(25.dp),
                                                 enabled = reschedEnabled)
@@ -379,7 +379,7 @@ fun AppointmentContent(
                                             Button(
                                                     onClick = { IntentUtils.launchBrowser(context, paymentUrl) } ,
                                                     modifier = Modifier
-                                                            .height(40.dp) ,
+                                                            .height(45.dp) ,
                                                     colors = ButtonDefaults.buttonColors(backgroundColor = buttonGreen) ,
                                                     shape = RoundedCornerShape(25.dp),
                                                     enabled = paymentEnabled)
@@ -393,7 +393,7 @@ fun AppointmentContent(
                                             Button(
                                                     onClick = { onCancelClick() } ,
                                                     modifier = Modifier
-                                                            .height(40.dp) ,
+                                                            .height(45.dp) ,
                                                     colors = ButtonDefaults.buttonColors(backgroundColor = buttonRed) ,
                                                     shape = RoundedCornerShape(25.dp),
                                                     enabled = cancelEnabled)
@@ -422,7 +422,7 @@ fun PaymentStatus(status : String?)
     val paid = "PAID"
 
     Card(modifier = Modifier
-            .width(100.dp)
+            .width(105.dp)
             .height(35.dp) ,
          shape = RoundedCornerShape(25.dp) ,
          backgroundColor = when(status) {
@@ -473,7 +473,7 @@ fun AppointmentStatus(status : String?)
     val past = "PAST"
 
     Card(modifier = Modifier
-            .width(100.dp)
+            .width(105.dp)
             .height(35.dp) ,
          shape = RoundedCornerShape(25.dp) ,
          backgroundColor = when(status) {

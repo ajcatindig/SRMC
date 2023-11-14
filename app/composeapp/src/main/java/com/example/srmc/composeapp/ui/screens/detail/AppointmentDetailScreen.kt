@@ -365,12 +365,12 @@ fun AppointmentContent(
                                             Button(
                                                 onClick = { onNavigateToForm(data.id!!, data.doctor.id!!) } ,
                                                 modifier = Modifier
-                                                        .height(45.dp) ,
+                                                        .height(40.dp) ,
                                                 colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xff15C3DD)) ,
                                                 shape = RoundedCornerShape(25.dp),
                                                 enabled = reschedEnabled)
                                             {
-                                                Text(text = "Reschedule" , color = Color.White , style = typography.h6, fontSize = 18.sp, textAlign = TextAlign.Center)
+                                                Text(text = "Reschedule" , color = Color.White , style = typography.h6, fontSize = 16.sp, textAlign = TextAlign.Center)
                                             }
                                         }
                                         Row(horizontalArrangement = Arrangement.Center,
@@ -379,12 +379,12 @@ fun AppointmentContent(
                                             Button(
                                                     onClick = { IntentUtils.launchBrowser(context, paymentUrl) } ,
                                                     modifier = Modifier
-                                                            .height(45.dp) ,
+                                                            .height(40.dp) ,
                                                     colors = ButtonDefaults.buttonColors(backgroundColor = buttonGreen) ,
                                                     shape = RoundedCornerShape(25.dp),
                                                     enabled = paymentEnabled)
                                             {
-                                                Text(text = "Pay" , color = Color.White , style = typography.h6, fontSize = 18.sp, textAlign = TextAlign.Center)
+                                                Text(text = "Pay" , color = Color.White , style = typography.h6, fontSize = 16.sp, textAlign = TextAlign.Center)
                                             }
                                         }
                                         Row(horizontalArrangement = Arrangement.End,
@@ -393,12 +393,12 @@ fun AppointmentContent(
                                             Button(
                                                     onClick = { onCancelClick() } ,
                                                     modifier = Modifier
-                                                            .height(45.dp) ,
+                                                            .height(40.dp) ,
                                                     colors = ButtonDefaults.buttonColors(backgroundColor = buttonRed) ,
                                                     shape = RoundedCornerShape(25.dp),
                                                     enabled = cancelEnabled)
                                             {
-                                                Text(text = "Cancel" , color = Color.White , style = typography.h6, fontSize = 18.sp, textAlign = TextAlign.Center)
+                                                Text(text = "Cancel" , color = Color.White , style = typography.h6, fontSize = 16.sp, textAlign = TextAlign.Center)
                                             }
                                         }
                                     }
@@ -422,7 +422,7 @@ fun PaymentStatus(status : String?)
     val paid = "PAID"
 
     Card(modifier = Modifier
-            .width(110.dp)
+            .width(100.dp)
             .height(35.dp) ,
          shape = RoundedCornerShape(25.dp) ,
          backgroundColor = when(status) {
@@ -446,7 +446,7 @@ fun PaymentStatus(status : String?)
                     else -> pending
                 } ,
                      style = typography.h5 ,
-                     fontSize = 16.sp ,
+                     fontSize = 14.sp ,
                      textAlign = TextAlign.Center ,
                      color = Color.White ,
                      maxLines = 1)
@@ -473,7 +473,7 @@ fun AppointmentStatus(status : String?)
     val past = "PAST"
 
     Card(modifier = Modifier
-            .width(110.dp)
+            .width(100.dp)
             .height(35.dp) ,
          shape = RoundedCornerShape(25.dp) ,
          backgroundColor = when(status) {
@@ -507,7 +507,7 @@ fun AppointmentStatus(status : String?)
                     else -> pending
                 } ,
                      style = typography.h5 ,
-                     fontSize = 16.sp ,
+                     fontSize = 14.sp ,
                      textAlign = TextAlign.Center ,
                      color = Color.White ,
                      maxLines = 1)

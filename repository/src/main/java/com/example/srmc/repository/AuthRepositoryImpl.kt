@@ -39,10 +39,6 @@ class AuthRepositoryImpl @Inject internal constructor(
         }.getOrDefault(Either.error("Something went wrong!"))
     }
 
-
-
-
-
     override suspend fun forgotPassword(email : String) : Either<ForgotResult>
     {
         return runCatching {

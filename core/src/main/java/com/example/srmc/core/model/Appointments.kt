@@ -20,5 +20,6 @@ data class Appointments(
         val verified_at : String?,
         val payment_link : String?,
         val doctor_name : String?,
-        val doctor : Doctor
+        val doctor : Doctor,
+        val meeting_link : String?
 )

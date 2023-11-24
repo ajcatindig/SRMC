@@ -35,6 +35,7 @@ class AppointmentDetailViewModel @AssistedInject constructor(
                 accepted_at = null, cancelled_at = null, scheduled_at = null, rescheduled_at = null, followed_up_at = null, created_at = null,
                 verified_at = null, payment_link = null,
                 doctor_name = null,
+                meeting_link = null,
                 doctor = Doctor(id = null, name = null, email = null, contact_number = null, slots = null, type = null, profile_photo_path = null, title = null))))
 {
     private lateinit var selectedAppointment : Appointments

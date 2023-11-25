@@ -123,16 +123,16 @@ fun AppointmentCard(
                             if (accepted_at?.isNotEmpty()!! && cancelled_at?.isEmpty()!! && check_out?.isEmpty()!!)
                             {
                                 "upcoming"
-                            } else if (cancelled_at?.isNotEmpty()!! || accepted_at.isNotEmpty())
+                            } else if (cancelled_at?.isNotEmpty()!! && accepted_at.isNotEmpty())
                             {
                                 "cancelled"
-                            } else if (rescheduled_at?.isNotEmpty()!! || accepted_at.isNotEmpty() )
+                            } else if (rescheduled_at?.isNotEmpty()!! && accepted_at.isNotEmpty() )
                             {
                                 "rescheduled"
-                            } else if (followed_up_at?.isNotEmpty()!! || accepted_at.isNotEmpty())
+                            } else if (followed_up_at?.isNotEmpty()!! && accepted_at.isNotEmpty())
                             {
                                 "followup"
-                            } else if (check_out?.isNotEmpty()!!)
+                            } else if (check_in?.isNotEmpty()!! && check_out?.isNotEmpty()!!)
                             {
                                 "past"
                             } else {
@@ -286,7 +286,7 @@ fun AppointmentStatusChip(status : String?)
     val cancelled = "CANCELLED"
     val rescheduled = "RESCHEDULED"
     val followUp = "FOLLOW-UP"
-    val past = "PAST"
+    val past = "COMPLETED"
 
     Card(modifier = Modifier
             .width(110.dp)

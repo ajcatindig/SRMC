@@ -115,8 +115,8 @@ fun AppointmentContent(
     val context = LocalContext.current
     val paymentUrl = data.payment_link.orEmpty()
     val paymentEnabled by derivedStateOf { data.verified_at == null && data.payment_link != null && data.cancelled_at == null && data.accepted_at != null }
-    val reschedEnabled by derivedStateOf { data.cancelled_at == null }
-    val cancelEnabled by derivedStateOf { data.accepted_at != null && data.check_out == null && data.cancelled_at == null }
+    val reschedEnabled by derivedStateOf { data.cancelled_at == null && data.check_in == null && data.check_out == null}
+    val cancelEnabled by derivedStateOf { data.accepted_at != null && data.check_in == null && data.check_out == null && data.cancelled_at == null }
     val conditionMet by derivedStateOf { data.meeting_link != null }
 
     val timeFormatter24 = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
@@ -149,7 +149,7 @@ fun AppointmentContent(
             SwipeRefresh(
                 state =  rememberSwipeRefreshState(isLoading),
                 onRefresh = onRefresh,
-                swipeEnabled = isConnectivityAvailable == true)
+                swipeEnabled = true)
             {
                 Column {
                     if (isConnectivityAvailable != null) {
@@ -246,16 +246,16 @@ fun AppointmentContent(
                                                         if (data.accepted_at != null && data.cancelled_at == null && data.check_out == null)
                                                         {
                                                             "upcoming"
-                                                        } else if (data.accepted_at != null || data.cancelled_at != null)
+                                                        } else if (data.accepted_at != null && data.cancelled_at != null)
                                                         {
                                                             "cancelled"
-                                                        } else if (data.rescheduled_at != null || data.accepted_at != null)
+                                                        } else if (data.rescheduled_at != null && data.accepted_at != null)
                                                         {
                                                             "rescheduled"
-                                                        } else if (data.followed_up_at != null || data.accepted_at != null)
+                                                        } else if (data.followed_up_at != null && data.accepted_at != null)
                                                         {
                                                             "followup"
-                                                        } else if (data.check_out != null)
+                                                        } else if (data.check_in != null && data.check_out != null)
                                                         {
                                                             "past"
                                                         } else {
@@ -502,7 +502,7 @@ fun AppointmentStatus(status : String?)
     val cancelled = "CANCELLED"
     val rescheduled = "RESCHEDULED"
     val followUp = "FOLLOW-UP"
-    val past = "PAST"
+    val past = "COMPLETED"
 
     Card(modifier = Modifier
             .width(105.dp)

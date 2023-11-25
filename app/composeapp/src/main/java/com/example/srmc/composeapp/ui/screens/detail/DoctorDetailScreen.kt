@@ -82,7 +82,7 @@ fun DoctorContent(
             SwipeRefresh(
                 state = rememberSwipeRefreshState(isLoading),
                 onRefresh = onRefresh,
-                swipeEnabled = isConnectivityAvailable == true)
+                swipeEnabled = true)
             {
                 Column {
                     if (isConnectivityAvailable != null) {

@@ -316,32 +316,30 @@ fun DoctorSlotsForm(
 
 // Parse the time strings from the API
                 val startTime = if (!index.start_time.isNullOrEmpty()) timeFormatter24.parse(index.start_time) else null
-                val endTime = if (!index.end_time.isNullOrEmpty()) timeFormatter24.parse(index.end_time) else null
 
 // Check if parsing was successful before formatting
                 val timeFormatter12 = SimpleDateFormat("h:mm a", Locale.getDefault())
                 val start = startTime?.let { timeFormatter12.format(it) }
-                val end = endTime?.let { timeFormatter12.format(it) }
 
 
                 Row(modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 0.dp)
-                        .selectable(selected = (selectedSlot == "${index.start_time} - ${index.start_time}") ,
-                                    onClick = { onSelectedSlot("${index.start_time} - ${index.end_time}") } ,
+                        .selectable(selected = (selectedSlot == "${index.start_time}") ,
+                                    onClick = { index.start_time?.let { onSelectedSlot(it) } } ,
                                     role = Role.Button) ,
                     horizontalArrangement = Arrangement.Start ,
                     verticalAlignment = Alignment.CenterVertically)
                 {
                     RadioButton(
-                            selected =  (selectedSlot == "${index.start_time} - ${index.end_time}"),
-                            onClick = { onSelectedSlot("${index.start_time} - ${index.end_time}") },
+                            selected =  (selectedSlot == "${index.start_time}"),
+                            onClick = { index.start_time?.let { onSelectedSlot(it) } },
                             modifier = Modifier.padding(end = 8.dp),
                             colors = RadioButtonDefaults.colors(
                                     selectedColor = Color(0xff15C3DD) ,
                                     unselectedColor = Color(0xff15C3DD).copy(alpha = 0.5f)
                                                                ))
-                    Text(text = "$start - $end" ,
+                    Text(text = "$start" ,
                          style = typography.caption ,
                          fontSize = 16.sp ,
                          textAlign = TextAlign.Start)

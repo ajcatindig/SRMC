@@ -209,11 +209,19 @@ fun AppointmentContent(
                                             }
                                             Row(verticalAlignment = Alignment.CenterVertically,
                                                 horizontalArrangement = Arrangement.Center,
-                                                modifier = Modifier.padding(bottom = 8.dp))
+                                                modifier = Modifier.padding(bottom = 4.dp))
                                             {
                                                 Text(text = "Dr. ${data.doctor.name}",
                                                      style = typography.h5,
                                                      fontSize = 18.sp)
+                                            }
+                                            Row(verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.Center,
+                                                modifier = Modifier.padding(bottom = 8.dp))
+                                            {
+                                                Text(text = "${data.doctor.title}",
+                                                     style = typography.subtitle2,
+                                                     fontSize = 16.sp)
                                             }
                                         }
                                     }
@@ -334,9 +342,9 @@ fun AppointmentContent(
                                                     verticalAlignment = Alignment.CenterVertically)
                                                 {
                                                     Text(text = if (data.follow_up_start_time != null && data.follow_up_end_time != null) {
-                                                        "Time: $follow_start - $follow_end"
+                                                        "Time: $follow_start"
                                                     } else {
-                                                        "Time: $start - $end"
+                                                        "Time: $start"
                                                     },
                                                          style = typography.caption,
                                                          fontSize = 16.sp)
@@ -448,9 +456,9 @@ fun AppointmentContent(
 fun PaymentStatus(status : String?)
 {
     val isPaid = buttonGreen
-    val isPending = darkOrange
+    val isPending = surfaceNight
 
-    val pending = "PENDING"
+    val pending = "UNPAID"
     val paid = "PAID"
 
     Card(modifier = Modifier

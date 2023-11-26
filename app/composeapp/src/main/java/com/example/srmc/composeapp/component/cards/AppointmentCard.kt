@@ -43,7 +43,6 @@ import java.util.Locale
 fun AppointmentCard(
         type : String,
         start_time : String,
-        end_time : String,
         check_in : String?,
         check_out : String?,
         accepted_at : String?,
@@ -53,7 +52,6 @@ fun AppointmentCard(
         payment_link : String?,
         doctor_name : String,
         follow_up_start_time : String?,
-        follow_up_end_time : String?,
         followed_up_at : String?,
         scheduled_at : String,
         created_at : String,
@@ -63,16 +61,12 @@ fun AppointmentCard(
 
 // Parse the time strings from the API
     val startTime = if (!start_time.isNullOrEmpty()) timeFormatter24.parse(start_time) else null
-    val endTime = if (!end_time.isNullOrEmpty()) timeFormatter24.parse(end_time) else null
     val followUpStartTime = follow_up_start_time?.let { if (!it.isNullOrEmpty()) timeFormatter24.parse(it) else null }
-    val followUpEndTime = follow_up_end_time?.let { if (!it.isNullOrEmpty()) timeFormatter24.parse(it) else null }
 
 // Check if parsing was successful before formatting
     val timeFormatter12 = SimpleDateFormat("h:mm a", Locale.getDefault())
     val start = startTime?.let { timeFormatter12.format(it) }
-    val end = endTime?.let { timeFormatter12.format(it) }
     val follow_start = followUpStartTime?.let { timeFormatter12.format(it) }
-    val follow_end = followUpEndTime?.let { timeFormatter12.format(it) }
     val context = LocalContext.current
 
     Card(
@@ -171,10 +165,10 @@ fun AppointmentCard(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Start)
                 {
-                    Text(text = if (follow_up_start_time?.isNotEmpty()!! && follow_up_end_time?.isNotEmpty()!!) {
-                            "Time: $follow_start - $follow_end"
+                    Text(text = if (follow_up_start_time?.isNotEmpty()!!) {
+                            "Time: $follow_start"
                     } else {
-                           "Time: $start - $end"
+                           "Time: $start"
                     },
                          style = typography.subtitle1 ,
                          textAlign = TextAlign.Start ,
@@ -232,9 +226,9 @@ fun AppointmentCard(
 fun PaymentStatusChip(status : String?)
 {
     val isPaid = buttonGreen
-    val isPending = darkOrange
+    val isPending = surfaceNight
 
-    val pending = "PENDING"
+    val pending = "UNPAID"
     val paid = "PAID"
 
     Card(modifier = Modifier

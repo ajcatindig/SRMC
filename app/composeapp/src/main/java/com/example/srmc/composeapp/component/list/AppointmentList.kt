@@ -22,7 +22,6 @@ fun AppointmentList(data : List<Appointments?>, onClick : (Appointments) -> Unit
                 AppointmentCard(
                         type =  index?.type.orEmpty() ,
                         start_time =  index?.start_time.orEmpty()  ,
-                        end_time =  index?.end_time.orEmpty()  ,
                         check_in = index?.check_in.orEmpty(),
                         check_out = index?.check_out.orEmpty(),
                         accepted_at = index?.accepted_at.orEmpty(),
@@ -32,7 +31,6 @@ fun AppointmentList(data : List<Appointments?>, onClick : (Appointments) -> Unit
                         payment_link = index?.payment_link.orEmpty(),
                         doctor_name = index?.doctor_name.orEmpty(),
                         follow_up_start_time = index?.follow_up_start_time.orEmpty(),
-                        follow_up_end_time = index?.follow_up_end_time.orEmpty(),
                         followed_up_at = index?.followed_up_at.orEmpty(),
                         scheduled_at = index?.scheduled_at.orEmpty(),
                         created_at = index?.created_at.orEmpty(),

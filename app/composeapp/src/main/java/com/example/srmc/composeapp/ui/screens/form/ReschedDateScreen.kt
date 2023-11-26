@@ -199,8 +199,8 @@ fun ReschedForm(
                 horizontalArrangement = Arrangement.Start,
                 verticalAlignment = Alignment.CenterVertically)
             {
-                Text(text = if (appointment.follow_up_start_time != null && appointment.end_time != null) "Time: $follow_start - $follow_end"
-                     else "Time: $start - $end",
+                Text(text = if (appointment.follow_up_start_time != null && appointment.end_time != null) "Time: $follow_start"
+                     else "Time: $start",
                      style = typography.caption ,
                      fontSize = 16.sp ,
                      textAlign = TextAlign.Start)

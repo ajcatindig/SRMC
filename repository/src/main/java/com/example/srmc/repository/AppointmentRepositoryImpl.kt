@@ -36,7 +36,7 @@ class AppointmentRepositoryImpl @Inject internal constructor(
                     .getResponse()
 
             when(appointmentResponse.status) {
-                200 -> Either.success(AppointmentResult(appointmentResponse.message.toString()))
+                200 -> Either.success(AppointmentResult("Your request has been submitted. Please wait for an email regarding the confirmation of your request"))
                 422 -> Either.unprocessable(appointmentResponse.message!!)
                 else -> Either.error(appointmentResponse.message!!)
             }
@@ -53,7 +53,7 @@ class AppointmentRepositoryImpl @Inject internal constructor(
                     ReschedRequest(id = id, date = date, time = time)).getResponse()
 
             when(reschedResponse.status) {
-                200 -> Either.success(AppointmentResult(reschedResponse.message.toString()))
+                200 -> Either.success(AppointmentResult("Your request has been submitted. Please wait for an email regarding the confirmation of your request"))
                 422 -> Either.unprocessable(reschedResponse.message!!)
                 else -> Either.error(reschedResponse.message!!)
             }
@@ -66,7 +66,7 @@ class AppointmentRepositoryImpl @Inject internal constructor(
             val cancelResponse = appointmentService.cancelAppointment(id).getResponse()
 
             when(cancelResponse.status) {
-                200 -> Either.success(AppointmentResult(cancelResponse.message.toString()))
+                200 -> Either.success(AppointmentResult("Appointment Cancelled"))
                 422 -> Either.unprocessable(cancelResponse.message!!)
                 else -> Either.error(cancelResponse.message!!)
             }

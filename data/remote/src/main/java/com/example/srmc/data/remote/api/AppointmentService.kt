@@ -21,7 +21,7 @@ interface AppointmentService
     suspend fun postAppointment(@Body appointmentRequest : AppointmentRequest) : Response<AppointmentResponse>
 
     @Headers("Accept: application/json", "X-Requested-With: XMLHttpRequest")
-    @GET("api/appointments")
+    @GET("api/appointments/all")
     suspend fun getAppointments() : Response<AppointmentListResponse>
 
     @Headers("Accept: application/json" , "X-Requested-With: XMLHttpRequest")

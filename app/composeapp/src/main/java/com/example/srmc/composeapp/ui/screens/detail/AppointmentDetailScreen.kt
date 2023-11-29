@@ -116,7 +116,7 @@ fun AppointmentContent(
     val paymentUrl = data.payment_link.orEmpty()
     val paymentEnabled by derivedStateOf { data.verified_at == null && data.payment_link != null && data.cancelled_at == null && data.accepted_at != null }
     val reschedEnabled by derivedStateOf { data.cancelled_at == null && data.check_in == null && data.check_out == null}
-    val cancelEnabled by derivedStateOf { data.accepted_at != null && data.check_in == null && data.check_out == null && data.cancelled_at == null }
+    val cancelEnabled by derivedStateOf { data.check_in == null && data.check_out == null && data.cancelled_at == null }
     val conditionMet by derivedStateOf { data.meeting_link != null }
 
     val timeFormatter24 = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
